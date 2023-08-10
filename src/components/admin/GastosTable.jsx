@@ -1,48 +1,36 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-<<<<<<< HEAD
 import { toUpperCaseString } from "../../utilities/strings";
 import { formatCurrency } from "../../utilities/strings";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-=======
->>>>>>> c7a1ab3dc40df8b8ac3e80a4cfb63cde30ae19fa
 import axios from "axios";
+import ModalGastos from "./ModalGastos";
 const TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmFSb290IiwiZXhwIjozMjY1MDkzODkxfQ.nERn4p8tZp0Es6asf-jJpySxz2-LZuRA8-m8p0kUY5k";
 
 function GastosTable() {
+  const [showModal,setShowModal] = useState(false)
   const [url, setUrl] = useState(
     `https://rifa.cybriguard.com/gastos/?rifa_id=1`
   );
   const [gastos, setGastos] = useState([]);
-<<<<<<< HEAD
   const [loading, setLoading] = useState(false);
-=======
->>>>>>> c7a1ab3dc40df8b8ac3e80a4cfb63cde30ae19fa
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-<<<<<<< HEAD
         setLoading(true);
-=======
->>>>>>> c7a1ab3dc40df8b8ac3e80a4cfb63cde30ae19fa
         const response = await axios.get(url, {
           headers: {
             Authorization: `Bearer ${TOKEN}`,
           },
         });
-<<<<<<< HEAD
         const json = response.data;
         console.log(json);
         setLoading(false);
         setGastos(json); // Actualizar el estado aquí, dentro del bloque try
         console.log("gastos", gastos); // Esto mostrará el valor actualizado de gastos
-=======
-        setGastos(response.data);
-        console.log(response.data)
->>>>>>> c7a1ab3dc40df8b8ac3e80a4cfb63cde30ae19fa
       } catch (error) {
         console.error(error);
         toast.error(error.response.data.detail);
@@ -51,7 +39,6 @@ function GastosTable() {
 
     fetchData();
   }, []);
-<<<<<<< HEAD
 
   useEffect(() => {
     console.log("gastos actualizado:", gastos);
@@ -102,9 +89,7 @@ function GastosTable() {
   return (
     <div>
       <ToastContainer />
-      <div className="flex items-center justify-center my-3 rounded-lg">
-        <button onClick={() => console.log('hhh')} className="bg-green-500 py-2 px-2 hover:bg-green-600 text-white font-bold mx-auto rounded-lg flex items-center justify-center ">Agregar Gasto <AiOutlinePlusCircle className="mx-1"/></button>
-      </div>
+      <ModalGastos isOpen={showModal}/>
       <div className="ra-div-table">
         <table className="ra-main-table shadow">
           <thead className="">
@@ -131,12 +116,6 @@ function GastosTable() {
           </tbody>
         </table>
       </div>
-=======
-  return (
-    <div>
-      <ToastContainer />
-      gastosss
->>>>>>> c7a1ab3dc40df8b8ac3e80a4cfb63cde30ae19fa
     </div>
   );
 }
