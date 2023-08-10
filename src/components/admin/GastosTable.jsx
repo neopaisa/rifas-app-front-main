@@ -1,9 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
+<<<<<<< HEAD
 import { toUpperCaseString } from "../../utilities/strings";
 import { formatCurrency } from "../../utilities/strings";
 import { AiOutlinePlusCircle } from "react-icons/ai";
+=======
+>>>>>>> c7a1ab3dc40df8b8ac3e80a4cfb63cde30ae19fa
 import axios from "axios";
 const TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmFSb290IiwiZXhwIjozMjY1MDkzODkxfQ.nERn4p8tZp0Es6asf-jJpySxz2-LZuRA8-m8p0kUY5k";
@@ -13,22 +16,33 @@ function GastosTable() {
     `https://rifa.cybriguard.com/gastos/?rifa_id=1`
   );
   const [gastos, setGastos] = useState([]);
+<<<<<<< HEAD
   const [loading, setLoading] = useState(false);
+=======
+>>>>>>> c7a1ab3dc40df8b8ac3e80a4cfb63cde30ae19fa
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+<<<<<<< HEAD
         setLoading(true);
+=======
+>>>>>>> c7a1ab3dc40df8b8ac3e80a4cfb63cde30ae19fa
         const response = await axios.get(url, {
           headers: {
             Authorization: `Bearer ${TOKEN}`,
           },
         });
+<<<<<<< HEAD
         const json = response.data;
         console.log(json);
         setLoading(false);
         setGastos(json); // Actualizar el estado aquí, dentro del bloque try
         console.log("gastos", gastos); // Esto mostrará el valor actualizado de gastos
+=======
+        setGastos(response.data);
+        console.log(response.data)
+>>>>>>> c7a1ab3dc40df8b8ac3e80a4cfb63cde30ae19fa
       } catch (error) {
         console.error(error);
         toast.error(error.response.data.detail);
@@ -37,6 +51,7 @@ function GastosTable() {
 
     fetchData();
   }, []);
+<<<<<<< HEAD
 
   useEffect(() => {
     console.log("gastos actualizado:", gastos);
@@ -116,6 +131,12 @@ function GastosTable() {
           </tbody>
         </table>
       </div>
+=======
+  return (
+    <div>
+      <ToastContainer />
+      gastosss
+>>>>>>> c7a1ab3dc40df8b8ac3e80a4cfb63cde30ae19fa
     </div>
   );
 }
