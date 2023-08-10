@@ -87,7 +87,7 @@ function GastosTable() {
     }
   });
   return (
-    <div>
+    <div className="bg-gray-300 p-2">
       <ToastContainer />
       <ModalGastos isOpen={showModal}/>
       <div className="ra-div-table">
