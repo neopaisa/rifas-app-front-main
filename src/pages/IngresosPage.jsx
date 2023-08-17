@@ -6,8 +6,9 @@ function IngresosPage() {
   return (
     <div>
       <AvatarNavbar />
-      <IngresosTable/>
-      IngresosPage
+      <div className="bg-gray-300 py-3">
+        <IngresosTable />
+      </div>
     </div>
   );
 }

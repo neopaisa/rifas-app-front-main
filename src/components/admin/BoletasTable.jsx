@@ -12,22 +12,25 @@ import { toast, ToastContainer } from "react-toastify";
 function BoletasTable() {
   const [value, setValue] = useState("");
   const [user, setUser] = useState("");
-  const [adress,setAdress] = useState("");
-  const [phone,setPhone]= useState("");
-  const [valorPendiente, setValorPendiente] = useState(0)
+  const [adress, setAdress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [valorPendiente, setValorPendiente] = useState(0);
   const [page, setPage] = useState(1);
   const [allBoletas, setAllBoletas] = useState([]);
   const [loading, setLoading] = useState("");
   const [url, setUrl] = useState(
     "https://rifa.cybriguard.com/boletas/?rifa_id=1&page=1&page_size=100"
   );
-  const TOKEN =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmFSb290IiwiZXhwIjozMjY1MDkzODkxfQ.nERn4p8tZp0Es6asf-jJpySxz2-LZuRA8-m8p0kUY5k";
-
   //  MODAL FUCTIONS
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleOpen = (numeroBoleta, nombreUsuario,direccionUsuario,telefonoUsuario,valorPendiente) => {
+  const handleOpen = (
+    numeroBoleta,
+    nombreUsuario,
+    direccionUsuario,
+    telefonoUsuario,
+    valorPendiente
+  ) => {
     setValue(numeroBoleta);
     setUser(nombreUsuario);
     setAdress(direccionUsuario);
@@ -47,21 +50,20 @@ function BoletasTable() {
         setLoading(true);
         const response = await axios.get(url, {
           headers: {
-            Authorization: `Bearer ${TOKEN}`,
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmFSb290IiwiZXhwIjozMjY1MDkzODkxfQ.nERn4p8tZp0Es6asf-jJpySxz2-LZuRA8-m8p0kUY5k`,
           },
         });
         setAllBoletas(response.data);
         setLoading(false);
-        console.log(allBoletas)
+        console.log(allBoletas);
       } catch (error) {
         console.error(error);
-        toast.error(error.response.data.detail)
-        backPage()
+        toast.error(error.response.data.detail);
       }
     };
 
     fetchData();
-  }, [url,isOpen]);
+  }, [url, isOpen]);
   //PAGINATION
   function nextPage() {
     setPage((prevPage) => prevPage + 1);
@@ -81,8 +83,8 @@ function BoletasTable() {
     );
   }
 
-  function searchPage(value){
-    setPage(value)
+  function searchPage(value) {
+    setPage(value);
     setUrl(
       "https://rifa.cybriguard.com/boletas/?rifa_id=1&page=" +
         value +
@@ -90,8 +92,8 @@ function BoletasTable() {
     );
   }
 
-  function searchBoleta(value){
-    setUrl("https://rifa.cybriguard.com/boletas/"+value)
+  function searchBoleta(value) {
+    setUrl("https://rifa.cybriguard.com/boletas/" + value);
   }
   const itemList = allBoletas.map((item) => {
     if (!loading) {
@@ -104,7 +106,7 @@ function BoletasTable() {
             className="px-6 py-4 ra-number-container bg-gray-100"
             data-label="Número"
           >
-            {item.numero.toString().padStart(4, '0')}
+            {item.numero.toString().padStart(4, "0")}
           </td>
           <td
             className={"px-6 py-4 text-white font-bold " + "ra-" + item.estado}
@@ -127,7 +129,15 @@ function BoletasTable() {
           <td className="px-6 py-4" data-label="Editar">
             <button
               className="px-2 py-2 text-gray-500 text-lg"
-              onClick={() => handleOpen(item.numero, item.usuario,item.direccion,item.telefono,item.valor_pendiente)}
+              onClick={() =>
+                handleOpen(
+                  item.numero,
+                  item.usuario,
+                  item.direccion,
+                  item.telefono,
+                  item.valor_pendiente
+                )
+              }
             >
               <AiFillEdit />
             </button>
@@ -151,7 +161,7 @@ function BoletasTable() {
 
   return (
     <div className="ra-boletastable-container">
-      <ToastContainer/>
+      <ToastContainer />
       <ModalComponent
         isOpen={isOpen}
         handleClose={handleClose}
@@ -163,8 +173,14 @@ function BoletasTable() {
       />
       <div className="ra-pagination-container">
         <div className="m-1">
-          
-          <input type="number" placeholder="Boleta" className="ra-number-input" min="1" max="9999" onChange={(event) => searchBoleta(event.target.value)}/>
+          <input
+            type="number"
+            placeholder="Boleta"
+            className="ra-number-input"
+            min="1"
+            max="9999"
+            onChange={(event) => searchBoleta(event.target.value)}
+          />
           {/* <input
             type="text"
             placeholder="buscar boleta"
@@ -174,9 +190,17 @@ function BoletasTable() {
         <div className="d-flex mx-5">
           <BackButton e={backPage} page={page} />
           <div className=" text-gray-800">
-          <input type="number" placeholder="Página" min="1" max="100" className="ra-number-input" onChange={(event) => searchPage(event.target.value)}  value={page}/>
+            <input
+              type="number"
+              placeholder="Página"
+              min="1"
+              max="100"
+              className="ra-number-input"
+              onChange={(event) => searchPage(event.target.value)}
+              value={page}
+            />
           </div>
-          <NextButton e={nextPage} page={page}/>
+          <NextButton e={nextPage} page={page} />
         </div>
       </div>
       <div className="ra-div-table">
@@ -212,12 +236,12 @@ function BoletasTable() {
         </table>
       </div>
       <div className="d-flex mx-5">
-          <BackButton e={backPage} page={page} />
-          <div className=" text-gray-800 font-semibold py-2 px-4 w-5 flex justify-center h-12 aling-center">
-            {!loading ? page : <LoadingSpinner />}
-          </div>
-          <NextButton e={nextPage} />
-       </div>
+        <BackButton e={backPage} page={page} />
+        <div className=" text-gray-800 font-semibold py-2 px-4 w-5 flex justify-center h-12 aling-center">
+          {!loading ? page : <LoadingSpinner />}
+        </div>
+        <NextButton e={nextPage} />
+      </div>
     </div>
   );
 }

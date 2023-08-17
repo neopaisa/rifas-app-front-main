@@ -8,11 +8,13 @@ import { API_URL } from "../../api/api";
 import { ToastContainer, toast } from "react-toastify";
 
 function ModalGastos({ isOpen }) {
+  const today = new Date();
+  const fechaHoy = today.toISOString().split("T")[0];
   const [show, setShow] = useState(false);
   const [titulo, setTitulo] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [monto, setMonto] = useState(0);
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(fechaHoy);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

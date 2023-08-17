@@ -39,7 +39,7 @@ const ModalComponent = ({ isOpen, handleClose, value, user,adress,phone,valorPen
       username: usuario,
       telefono: telefono,
       boleta_numero: parseInt(value),
-      boleta_rifa_id: parseInt(1),
+      rifa_id: 1,
       direccion: direccion,
       restar_abono: restar
     };

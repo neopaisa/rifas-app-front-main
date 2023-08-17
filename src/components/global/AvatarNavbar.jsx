@@ -6,7 +6,7 @@ import logoM from '../../assets/logo/logoM.png'
 import { Link } from "react-router-dom";
 
 const navigation = [
-  { name: "Rifas", href: "/admin"},
+  { name: "Boletas", href: "/admin"},
   { name: "Vendedores", href: "/vendedores"},
   { name: "Ingresos", href: "/ingresos"},
   { name: "Gastos", href: "/gastos"},
