@@ -12,7 +12,7 @@ const TOKEN =
 function GastosTable() {
   const [showModal, setShowModal] = useState(false);
   const [url, setUrl] = useState(
-    `https://rifa.cybriguard.com/gastos/?rifa_id=1`
+    `https://rifa.cybriguard.com/gastos/?rifa_id=1&page=1&page_size=50`
   );
   const [gastos, setGastos] = useState([]);
   const [loading, setLoading] = useState(false);

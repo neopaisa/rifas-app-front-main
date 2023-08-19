@@ -1,3 +1,4 @@
+import React from "react";
 import { useRouteError } from "react-router-dom";
 
 export default function ErrorPage() {
@@ -6,9 +7,8 @@ export default function ErrorPage() {
 
   return (
     <div id="error-page">
-      <h1>Oops!</h1>
-      <h1>ohhhhhhhhh</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
+      <h1>ERROR</h1>
+      <h1>Algo salió mal</h1>
       <p>
         <i>{error.statusText || error.message}</i>
       </p>

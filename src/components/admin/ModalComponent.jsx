@@ -5,28 +5,35 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { API_URL } from "../../api/api";
 import { formatCurrency } from "../../utilities/strings";
-const ModalComponent = ({ isOpen, handleClose, value, user,adress,phone,valorPendiente }) => {
-
+const ModalComponent = ({
+  isOpen,
+  handleClose,
+  value,
+  user,
+  adress,
+  phone,
+  valorPendiente,
+}) => {
   const today = new Date();
-  const fechaHoy = today.toISOString().split('T')[0];
+  const fechaHoy = today.toISOString().split("T")[0];
   const [monto, setMonto] = useState(0);
   const [date, setDate] = useState(fechaHoy);
   const [usuario, setUsuario] = useState("");
-  const [telefono, setTelefono] = useState(0)
-  const [direccion,setDireccion] = useState('')
-  const [restar,setRestar] = useState(0)
+  const [telefono, setTelefono] = useState(0);
+  const [direccion, setDireccion] = useState("");
+  const [restar, setRestar] = useState(0);
 
-  useEffect(()=>{
-    if(!user){
-      setUsuario("")
-      setTelefono("")
-      setDireccion("")
-    }else{
-      setUsuario(user)
-      setTelefono(phone)
-      setDireccion(adress)
+  useEffect(() => {
+    if (!user) {
+      setUsuario("");
+      setTelefono("");
+      setDireccion("");
+    } else {
+      setUsuario(user);
+      setTelefono(phone);
+      setDireccion(adress);
     }
-  },[user])
+  }, [user]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,7 +48,7 @@ const ModalComponent = ({ isOpen, handleClose, value, user,adress,phone,valorPen
       boleta_numero: parseInt(value),
       rifa_id: 1,
       direccion: direccion,
-      restar_abono: restar
+      restar_abono: restar,
     };
 
     const token =
@@ -59,8 +66,8 @@ const ModalComponent = ({ isOpen, handleClose, value, user,adress,phone,valorPen
       })
       .catch((error) => {
         console.error("Error al hacer la solicitud:", error);
-        var errorDetail = error.response.data.detail
-        toast.error(errorDetail)
+        var errorDetail = error.response.data.detail;
+        toast.error(errorDetail);
       });
   };
 
@@ -72,7 +79,9 @@ const ModalComponent = ({ isOpen, handleClose, value, user,adress,phone,valorPen
       </Modal.Header>
       <Modal.Body>
         <div>
-          <p className="text-gray-500 ml-10">Valor Pendiente: {formatCurrency(valorPendiente)} </p>
+          <p className="text-gray-500 ml-10">
+            Valor Pendiente: {formatCurrency(valorPendiente)}{" "}
+          </p>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -95,6 +104,10 @@ const ModalComponent = ({ isOpen, handleClose, value, user,adress,phone,valorPen
                   className="block w-full  py-1.5 px-2 ra-input"
                 />
               </div>
+              <div className="flex justify-center items-center">
+                <p className="mr-2 p-3">Restar Cantidad</p>
+                <input type="checkbox" className="form-checkbox" onChange={(e) => (e.target.checked?setMonto(-1*monto):setMonto(monto)) }/>
+              </div>
             </div>
 
             <div>
@@ -114,7 +127,7 @@ const ModalComponent = ({ isOpen, handleClose, value, user,adress,phone,valorPen
                   autoComplete="name"
                   required
                   className="block w-full  py-1.5 px-2 ra-input"
-                  disabled={ !user ? false : true }
+                  disabled={!user ? false : true}
                   style={{ backgroundColor: !user ? "white" : "#eee" }}
                 />
               </div>
@@ -184,29 +197,6 @@ const ModalComponent = ({ isOpen, handleClose, value, user,adress,phone,valorPen
                 />
               </div>
             </div>
-              <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="restar"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Restar Abono
-                </label>
-              </div>
-              <div className="mt-2 mb-3">
-                <input
-                  value={restar}
-                  onChange={(event) => setRestar(event.target.value)}
-                  id="restar"
-                  name="restar"
-                  type="number"
-                  autoComplete="currency"
-                  required
-                  className="block w-full  py-1.5 px-2  ra-input"
-                />
-              </div>
-            </div>
-
             <div>
               <button
                 type="submit"
@@ -232,9 +222,9 @@ ModalComponent.propTypes = {
   handleClose: PropTypes.func.isRequired,
   value: PropTypes.number.isRequired,
   user: PropTypes.string,
-  adress:PropTypes.string,
-  phone:PropTypes.string,
-  valorPendiente:PropTypes.string,
+  adress: PropTypes.string,
+  phone: PropTypes.string,
+  valorPendiente: PropTypes.string,
 };
 
 export default ModalComponent;
