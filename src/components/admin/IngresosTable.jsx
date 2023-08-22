@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./index.scss";
+import { formatCurrency } from "../../utilities/strings";
 
 const IngresosTable = () => {
   const [data, setData] = useState([]);
@@ -48,21 +49,27 @@ const IngresosTable = () => {
       key={index}
     >
       <td
-        className="px-6 py-4 ra-number-container bg-gray-100"
+        className="px-6 py-2 ra-number-container bg-gray-100"
         data-label="Número"
       >
         {ingreso.numero}
       </td>
-      <td className="px-6 py-4 font-bold" data-label="Fecha">
+      <td
+        className="px-6 py-2  bg-gray-100"
+        data-label="Monto"
+      >
+        {formatCurrency(ingreso.monto)}
+      </td>
+      <td className="px-6 py-2 font-bold" data-label="Fecha">
         {ingreso.fecha}
       </td>
-      <td className="px-6 py-4" data-label="Usuario">
+      <td className="px-6 py-2" data-label="Usuario">
         {ingreso.username}
       </td>
-      <td className="px-6 py-4 bg-gray-100" data-label="Teléfono">
+      <td className="px-6 py-2 bg-gray-100" data-label="Teléfono">
         {ingreso.telefono}
       </td>
-      <td className="px-6 py-4" data-label="Dirección">
+      <td className="px-6 py-2" data-label="Dirección">
         {ingreso.direccion}
       </td>
     </tr>
@@ -83,19 +90,22 @@ const IngresosTable = () => {
         <table className="ra-main-table shadow">
           <thead>
             <tr className="text-left">
-              <th className="font-semibold text-sm uppercase px-6 py-4">
+              <th className="font-semibold text-sm uppercase px-6 py-2">
                 Número
               </th>
-              <th className="font-semibold text-sm uppercase px-6 py-4">
+              <th className="font-semibold text-sm uppercase px-6 py-2">
+                Monto
+              </th>
+              <th className="font-semibold text-sm uppercase px-6 py-2">
                 Fecha
               </th>
-              <th className="font-semibold text-sm uppercase px-6 py-4">
+              <th className="font-semibold text-sm uppercase px-6 py-2">
                 Usuario
               </th>
-              <th className="font-semibold text-sm uppercase px-6 py-4">
+              <th className="font-semibold text-sm uppercase px-6 py-2">
                 Teléfono
               </th>
-              <th className="font-semibold text-sm uppercase px-6 py-4">
+              <th className="font-semibold text-sm uppercase px-6 py-2">
                 Dirección
               </th>
             </tr>

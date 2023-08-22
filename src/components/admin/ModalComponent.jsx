@@ -21,7 +21,6 @@ const ModalComponent = ({
   const [usuario, setUsuario] = useState("");
   const [telefono, setTelefono] = useState(0);
   const [direccion, setDireccion] = useState("");
-  const [restar, setRestar] = useState(0);
 
   useEffect(() => {
     if (!user) {
@@ -48,7 +47,6 @@ const ModalComponent = ({
       boleta_numero: parseInt(value),
       rifa_id: 1,
       direccion: direccion,
-      restar_abono: restar,
     };
 
     const token =

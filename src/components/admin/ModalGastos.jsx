@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import axios from "axios";
@@ -168,14 +167,6 @@ function ModalGastos({ isOpen }) {
             </div>
           </form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cerrar
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Guardar
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );

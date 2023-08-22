@@ -99,34 +99,34 @@ function BoletasTable() {
     if (!loading) {
       return (
         <tr
-          className="hover:bg-gray-200 hover:cursor-pointer ra-fade-animation"
+          className="ra-fade-animation"
           key={item.numero}
         >
           <td
-            className="px-6 py-4 ra-number-container bg-gray-100"
+            className="px-6 py-2 ra-number-container bg-gray-100"
             data-label="Número"
           >
             {item.numero.toString().padStart(4, "0")}
           </td>
           <td
-            className={"px-6 py-4 text-white font-bold " + "ra-" + item.estado}
+            className={"px-6 py-2 text-white font-bold " + "ra-" + item.estado}
             data-label="Estado"
           >
             {toUpperCaseString(item.estado)}
           </td>
-          <td className="px-6 py-4" data-label="Precio">
+          <td className="px-6 py-2" data-label="Precio">
             {formatCurrency(item.precio)}
           </td>
-          <td className="px-6 py-4 bg-gray-100" data-label="Acumulado">
+          <td className="px-6 py-2 bg-gray-100" data-label="Acumulado">
             {formatCurrency(item.acumulado)}
           </td>
-          <td className="px-6 py-4" data-label="Usuario">
+          <td className="px-6 py-2" data-label="Usuario">
             {item.usuario}
           </td>
-          <td className="px-6 py-4 bg-gray-100" data-label="Valor Pendiente">
+          <td className="px-6 py-2 bg-gray-100" data-label="Valor Pendiente">
             {formatCurrency(item.valor_pendiente)}
           </td>
-          <td className="px-6 py-4" data-label="Editar">
+          <td className="px-6 py-2" data-label="Editar">
             <button
               className="px-2 py-2 text-gray-500 text-lg"
               onClick={() =>
@@ -210,22 +210,22 @@ function BoletasTable() {
               <th className="font-semibold text-sm uppercase px-6 py-">
                 Número
               </th>
-              <th className="font-semibold text-sm uppercase px-6 py-4">
+              <th className="font-semibold text-sm uppercase px-6 py-2">
                 Estado
               </th>
-              <th className="font-semibold text-sm uppercase px-6 py-4">
+              <th className="font-semibold text-sm uppercase px-6 py-2">
                 Precio
               </th>
-              <th className="font-semibold text-sm uppercase px-6 py-4">
+              <th className="font-semibold text-sm uppercase px-6 py-2">
                 Abonado
               </th>
-              <th className="font-semibold text-sm uppercase px-6 py-4">
+              <th className="font-semibold text-sm uppercase px-6 py-2">
                 Usuario
               </th>
-              <th className="font-semibold text-sm uppercase px-6 py-4">
+              <th className="font-semibold text-sm uppercase px-6 py-2">
                 Valor pendiente
               </th>
-              <th className="font-semibold text-sm uppercase px-6 py-4">
+              <th className="font-semibold text-sm uppercase px-6 py-2">
                 Editar
               </th>
             </tr>
