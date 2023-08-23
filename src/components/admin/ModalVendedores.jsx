@@ -7,13 +7,12 @@ import { API_URL } from "../../api/api";
 import { ToastContainer, toast } from "react-toastify";
 
 function ModalVendedores({ isOpen }) {
-  const today = new Date();
-  const fechaHoy = today.toISOString().split("T")[0];
   const [show, setShow] = useState(false);
-  const [titulo, setTitulo] = useState("");
-  const [descripcion, setDescripcion] = useState("");
-  const [monto, setMonto] = useState(0);
-  const [date, setDate] = useState(fechaHoy);
+  const [nombre, setNombre] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [ciudad, setCiudad] = useState("");
+  const [direccion, setDireccion] = useState("");
+  const [cedula, setCedula] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -25,14 +24,14 @@ function ModalVendedores({ isOpen }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const url = `${API_URL}contabilidad/crear`;
+    const url = `${API_URL}vendedor/crear`;
 
     const data = {
-      titulo: titulo,
-      descripcion: descripcion,
-      fecha_gasto: date,
-      monto: monto,
-      boleta_rifa_id: 1,
+      username: nombre,
+      telefono: telefono,
+      direccion: direccion,
+      cedula: cedula,
+      ciudad: ciudad,
     };
 
     const token =
@@ -73,17 +72,17 @@ function ModalVendedores({ isOpen }) {
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
               <div>
                 <label
-                  htmlFor="titulo"
+                  htmlFor="nombre"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Titulo
+                  Nombre
                 </label>
                 <div className="mt-2">
                   <input
-                    value={titulo}
-                    onChange={(event) => setTitulo(event.target.value)}
-                    id="titulo"
-                    name="titulo"
+                    value={nombre}
+                    onChange={(event) => setNombre(event.target.value)}
+                    id="nombre"
+                    name="nombre"
                     type="text"
                     autoComplete="title"
                     required
@@ -93,18 +92,41 @@ function ModalVendedores({ isOpen }) {
               </div>
 
               <div>
+                <div className="flex items-center justify-between">
+                  <label
+                    htmlFor="cedula"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Cédula
+                  </label>
+                </div>
+                <div className="mt-2 mb-2">
+                  <input
+                    value={cedula}
+                    onChange={(event) => setCedula(event.target.value)}
+                    id="id"
+                    name="id"
+                    type="number"
+                    autoComplete="id"
+                    required
+                    className="block w-full  py-1.5 px-2  ra-input"
+                  />
+                </div>
+              </div>
+
+              <div>
                 <label
-                  htmlFor="descipcion"
+                  htmlFor="telefono"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Descripción
+                  Telefono
                 </label>
                 <div className="mt-2">
                   <input
-                    value={descripcion}
-                    onChange={(event) => setDescripcion(event.target.value)}
-                    id="descripcion"
-                    name="descripcion"
+                    value={telefono}
+                    onChange={(event) => setTelefono(event.target.value)}
+                    id="telefono"
+                    name="telefono"
                     type="text"
                     autoComplete="description"
                     required
@@ -112,46 +134,43 @@ function ModalVendedores({ isOpen }) {
                   />
                 </div>
               </div>
-
               <div>
                 <label
-                  htmlFor="monto"
+                  htmlFor="ciudad"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Monto
+                  Ciudad
                 </label>
                 <div className="mt-2">
                   <input
-                    value={monto}
-                    onChange={(event) => setMonto(event.target.value)}
-                    id="monto"
-                    name="monto"
-                    type="currency"
-                    autoComplete="currency"
+                    value={ciudad}
+                    onChange={(event) => setCiudad(event.target.value)}
+                    id="ciudad"
+                    name="ciudad"
+                    type="text"
+                    autoComplete="city"
                     required
                     className="block w-full  py-1.5 px-2 ra-input"
                   />
                 </div>
               </div>
               <div>
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="fecha"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Fecha
-                  </label>
-                </div>
+                <label
+                  htmlFor="direccion"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Direccion
+                </label>
                 <div className="mt-2 mb-3">
                   <input
-                    value={date}
-                    onChange={(event) => setDate(event.target.value)}
-                    id="date"
-                    name="date"
-                    type="date"
-                    autoComplete="date"
+                    value={direccion}
+                    onChange={(event) => setDireccion(event.target.value)}
+                    id="direccion"
+                    name="direccion"
+                    type="text"
+                    autoComplete="adress"
                     required
-                    className="block w-full  py-1.5 px-2  ra-input"
+                    className="block w-full  py-1.5 px-2 ra-input"
                   />
                 </div>
               </div>

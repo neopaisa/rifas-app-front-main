@@ -62,7 +62,7 @@ const VendedoresTable = () => {
   }, [vendedorName]);
   return (
     <div>
-      <ModalVendedores isOpen={false} />
+      <ModalVendedores isOpen={true} />
       <div className="flex flex-wrap justify-evenly">
         <div className=" bg-white shadow mx-2 my-1 rounded">
           <table className="table-auto">
