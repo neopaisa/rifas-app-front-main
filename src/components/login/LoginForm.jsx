@@ -79,12 +79,12 @@ function LoginForm() {
                   Contraseña
                 </label>
                 <div className="text-sm">
-                  <a
+                  {/* <a
                     href="#"
                     className="font-semibold text-blue-600 hover:text-blue-500"
                   >
                     ¿Olvidaste tu contraseña?
-                  </a>
+                  </a> */}
                 </div>
               </div>
               <div className="mt-2">
@@ -112,7 +112,7 @@ function LoginForm() {
             </div>
           </form>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
+         {/*  <p className="mt-10 text-center text-sm text-gray-500">
             ¿No eres meimbro?-
             <a
               href="#"
@@ -120,7 +120,7 @@ function LoginForm() {
             >
               Regístrate
             </a>
-          </p>
+          </p> */}
         </div>
       </div>
     </>
