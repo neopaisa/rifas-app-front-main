@@ -49,27 +49,27 @@ const IngresosTable = () => {
       key={index}
     >
       <td
-        className="px-6 py-2 ra-number-container bg-gray-100"
+        className="px-6 py-1 ra-number-container bg-gray-100"
         data-label="Número"
       >
         {ingreso.numero}
       </td>
       <td
-        className="px-6 py-2  bg-gray-100"
+        className="px-6 py-1  bg-gray-100"
         data-label="Monto"
       >
         {formatCurrency(ingreso.monto)}
       </td>
-      <td className="px-6 py-2 font-bold" data-label="Fecha">
+      <td className="px-6 py-1 font-bold" data-label="Fecha">
         {ingreso.fecha}
       </td>
-      <td className="px-6 py-2" data-label="Usuario">
+      <td className="px-6 py-1" data-label="Usuario">
         {ingreso.username}
       </td>
-      <td className="px-6 py-2 bg-gray-100" data-label="Teléfono">
+      <td className="px-6 py-1 bg-gray-100" data-label="Teléfono">
         {ingreso.telefono}
       </td>
-      <td className="px-6 py-2" data-label="Dirección">
+      <td className="px-6 py-1" data-label="Dirección">
         {ingreso.direccion}
       </td>
     </tr>

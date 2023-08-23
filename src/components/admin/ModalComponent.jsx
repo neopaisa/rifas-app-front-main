@@ -67,6 +67,7 @@ const ModalComponent = ({
         var errorDetail = error.response.data.detail;
         toast.error(errorDetail);
       });
+    handleClose();
   };
 
   return (
@@ -104,7 +105,13 @@ const ModalComponent = ({
               </div>
               <div className="flex justify-center items-center">
                 <p className="mr-2 p-3">Restar Cantidad</p>
-                <input type="checkbox" className="form-checkbox" onChange={(e) => (e.target.checked?setMonto(-1*monto):setMonto(monto)) }/>
+                <input
+                  type="checkbox"
+                  className="form-checkbox"
+                  onChange={(e) =>
+                    e.target.checked ? setMonto(-1 * monto) : setMonto(monto)
+                  }
+                />
               </div>
             </div>
 

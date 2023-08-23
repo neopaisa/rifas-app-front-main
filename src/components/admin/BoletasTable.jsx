@@ -103,32 +103,32 @@ function BoletasTable() {
           key={item.numero}
         >
           <td
-            className="px-6 py-2 ra-number-container bg-gray-100"
+            className="px-6 py-1 ra-number-container bg-gray-100"
             data-label="Número"
           >
             {item.numero.toString().padStart(4, "0")}
           </td>
           <td
-            className={"px-6 py-2 text-white font-bold " + "ra-" + item.estado}
+            className={"px-6 py-1 text-white font-bold " + "ra-" + item.estado}
             data-label="Estado"
           >
             {toUpperCaseString(item.estado)}
           </td>
-          <td className="px-6 py-2" data-label="Precio">
+          <td className="px-6 py-1" data-label="Precio">
             {formatCurrency(item.precio)}
           </td>
-          <td className="px-6 py-2 bg-gray-100" data-label="Acumulado">
+          <td className="px-6 py-1 bg-gray-100" data-label="Acumulado">
             {formatCurrency(item.acumulado)}
           </td>
-          <td className="px-6 py-2" data-label="Usuario">
+          <td className="px-6 py-1" data-label="Usuario">
             {item.usuario}
           </td>
-          <td className="px-6 py-2 bg-gray-100" data-label="Valor Pendiente">
+          <td className="px-6 py-1 bg-gray-100" data-label="Valor Pendiente">
             {formatCurrency(item.valor_pendiente)}
           </td>
-          <td className="px-6 py-2" data-label="Editar">
+          <td className="px-6 py-1" data-label="Editar">
             <button
-              className="px-2 py-2 text-gray-500 text-lg"
+              className="px-2 py-1 text-gray-500 text-lg"
               onClick={() =>
                 handleOpen(
                   item.numero,
@@ -207,25 +207,25 @@ function BoletasTable() {
         <table className="ra-main-table shadow rounded">
           <thead className="rounded">
             <tr className="text-left">
-              <th className="font-semibold text-sm uppercase px-6 py-">
+              <th className="font-semibold text-sm uppercase px-6 py-1">
                 Número
               </th>
-              <th className="font-semibold text-sm uppercase px-6 py-2">
+              <th className="font-semibold text-sm uppercase px-6 py-1">
                 Estado
               </th>
-              <th className="font-semibold text-sm uppercase px-6 py-2">
+              <th className="font-semibold text-sm uppercase px-6 py-1">
                 Precio
               </th>
-              <th className="font-semibold text-sm uppercase px-6 py-2">
+              <th className="font-semibold text-sm uppercase px-6 py-1">
                 Abonado
               </th>
-              <th className="font-semibold text-sm uppercase px-6 py-2">
+              <th className="font-semibold text-sm uppercase px-6 py-1">
                 Usuario
               </th>
-              <th className="font-semibold text-sm uppercase px-6 py-2">
+              <th className="font-semibold text-sm uppercase px-6 py-1">
                 Valor pendiente
               </th>
-              <th className="font-semibold text-sm uppercase px-6 py-2">
+              <th className="font-semibold text-sm uppercase px-6 py-1">
                 Editar
               </th>
             </tr>
@@ -237,7 +237,7 @@ function BoletasTable() {
       </div>
       <div className="d-flex mx-5">
         <BackButton e={backPage} page={page} />
-        <div className=" text-gray-800 font-semibold py-2 px-4 w-5 flex justify-center h-12 aling-center">
+        <div className=" text-gray-800 font-semibold py-1 px-4 w-5 flex justify-center h-12 aling-center">
           {!loading ? page : <LoadingSpinner />}
         </div>
         <NextButton e={nextPage} />

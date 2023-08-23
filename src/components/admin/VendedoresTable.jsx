@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { formatCurrency } from "../../utilities/strings";
+import ModalVendedores from "./ModalVendedores";
 
 const VendedoresTable = () => {
   const [vendedores, setVendedores] = useState([]);
@@ -59,70 +61,85 @@ const VendedoresTable = () => {
     fetchData();
   }, [vendedorName]);
   return (
-    <div className="flex">
-      <div className=" bg-white shadow w-1/4 mx-2 rounded">
-        <table className="table-auto">
-          <thead>
-            <tr>
-              <th className="px-4 py-1">Lista de Vendedores</th>
-              {/* Agrega más encabezados según la estructura de datos de la API */}
-            </tr>
-          </thead>
-          <tbody>
-            {vendedores.map((vendedor) => (
-              <tr key={vendedor.index} className="border-t">
-                <td
-                  className="px-4 py-1 cursor-pointer"
-                  onClick={() => setVendedorName(vendedor.username)}
-                >
-                  {vendedor.username}
-                </td>
-                {/* Agrega más celdas según la estructura de datos de la API */}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="bg-white p-3 rounded shadow mx-2">
-        <p>USUARIO: </p>
-        <h6>{vendedorInfo.username}</h6>
-        <p>{vendedorInfo.cedula}</p>
-        <p>{vendedorInfo.ciudad}</p>
-        <p>{vendedorInfo.telefono}</p>
-      </div>
-      <div className="bg-white p-1 rounded shadow">
-  <table style={{ fontSize: '10px' }}>
-    <thead>
-      <tr>
-        <th className="px-1 py-0">Numero</th>
-        <th className="px-1 py-0">Estado</th>
-        <th className="px-1 py-0">Usuario</th>
-        <th className="px-1 py-0">Teléfono</th>
-        <th className="px-1 py-0">Dirección</th>
-        <th className="px-1 py-0">Precio</th>
-        <th className="px-1 py-0">Acumulado</th>
-        <th className="px-1 py-0">Valor Pendiente</th>
-        <th className="px-1 py-0">Comisión</th>
-      </tr>
-    </thead>
-    <tbody>
-      {vendedorBoletas.map((boleta) => (
-        <tr key={boleta.numero} className="border-t">
-          <td className="px-1 py-0 cursor-pointer">{boleta.numero}</td>
-          <td className="px-1 py-0 cursor-pointer">{boleta.estado}</td>
-          <td className="px-1 py-0 cursor-pointer">{boleta.usuario}</td>
-          <td className="px-1 py-0 cursor-pointer">{boleta.telefono}</td>
-          <td className="px-1 py-0 cursor-pointer">{boleta.direccion}</td>
-          <td className="px-1 py-0 cursor-pointer">{boleta.precio}</td>
-          <td className="px-1 py-0 cursor-pointer">{boleta.acumulado}</td>
-          <td className="px-1 py-0 cursor-pointer">{boleta.valor_pendiente}</td>
-          <td className="px-1 py-0 cursor-pointer">{boleta.comision}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
+    <div>
+      <ModalVendedores isOpen={false} />
+      <div className="flex flex-wrap justify-evenly">
+        <div className=" bg-white shadow mx-2 my-1 rounded">
+          <table className="table-auto">
+            <thead>
+              <tr>
+                <th className="px-4 py-1">Lista de Vendedores</th>
 
+                {/* Agrega más encabezados según la estructura de datos de la API */}
+              </tr>
+            </thead>
+            <tbody>
+              {vendedores.map((vendedor) => (
+                <tr key={vendedor.index} className="border-t">
+                  <td
+                    className="px-4 py-1 cursor-pointer hover:bg-gray-100 h-fit"
+                    onClick={() => setVendedorName(vendedor.username)}
+                  >
+                    {vendedor.username}
+                  </td>
+                  {/* Agrega más celdas según la estructura de datos de la API */}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="bg-white p-1 rounded shadow my-1">
+          <table style={{ fontSize: "10px" }}>
+            <thead>
+              <tr>
+                <th className="px-1 py-0">Numero</th>
+                <th className="px-1 py-0">Estado</th>
+                <th className="px-1 py-0">Usuario</th>
+                <th className="px-1 py-0">Teléfono</th>
+                <th className="px-1 py-0">Dirección</th>
+                <th className="px-1 py-0">Precio</th>
+                <th className="px-1 py-0">Acumulado</th>
+                <th className="px-1 py-0">Valor Pendiente</th>
+                <th className="px-1 py-0">Comisión</th>
+              </tr>
+            </thead>
+            <tbody>
+              {vendedorBoletas.map((boleta) => (
+                <tr key={boleta.numero} className="border-t">
+                  <td className="px-1 py-0 cursor-pointer">{boleta.numero}</td>
+                  <td className="px-1 py-0 cursor-pointer">{boleta.estado}</td>
+                  <td className="px-1 py-0 cursor-pointer">{boleta.usuario}</td>
+                  <td className="px-1 py-0 cursor-pointer">
+                    {boleta.telefono}
+                  </td>
+                  <td className="px-1 py-0 cursor-pointer">
+                    {boleta.direccion}
+                  </td>
+                  <td className="px-1 py-0 cursor-pointer">
+                    {formatCurrency(boleta.precio)}
+                  </td>
+                  <td className="px-1 py-0 cursor-pointer">
+                    {formatCurrency(boleta.acumulado)}
+                  </td>
+                  <td className="px-1 py-0 cursor-pointer">
+                    {formatCurrency(boleta.valor_pendiente)}
+                  </td>
+                  <td className="px-1 py-0 cursor-pointer">
+                    {formatCurrency(boleta.comision)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="bg-white p-3 rounded shadow mx-2 my-1">
+          <h6>{vendedorInfo.username}</h6>
+          <p>{vendedorInfo.cedula}</p>
+          <p>{vendedorInfo.ciudad}</p>
+          <p>{vendedorInfo.telefono}</p>
+        </div>
+      </div>
     </div>
   );
 };
