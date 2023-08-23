@@ -203,9 +203,9 @@ function BoletasTable() {
           <NextButton e={nextPage} page={page} />
         </div>
       </div>
-      <div className="ra-div-table">
-        <table className="ra-main-table shadow">
-          <thead className="">
+      <div className="ra-div-table rounded">
+        <table className="ra-main-table shadow rounded">
+          <thead className="rounded">
             <tr className="text-left">
               <th className="font-semibold text-sm uppercase px-6 py-">
                 Número
