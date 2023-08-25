@@ -21,9 +21,9 @@ const VendedoresTable = () => {
   const [phone, setPhone] = useState("");
   const [valorPendiente, setValorPendiente] = useState(0);
 
-  const url = "https://rifa.cybriguard.com/vendedor/obtener";
-  const vendedorURL = "https://rifa.cybriguard.com/vendedor/informacion/";
-  const vendedorBoletasURL = "https://rifa.cybriguard.com/vendedor/boletas/";
+  const url = "https://rifa.cybriguard.com/ven/obtener";
+  const vendedorURL = "https://rifa.cybriguard.com/ven/informacion/";
+  const vendedorBoletasURL = "https://rifa.cybriguard.com/ven/boletas/";
   const vendedorComisionURL = "https://rifa.cybriguard.com/contabilidad/ingreso/1088349108/?rifa_id=1&page=1&page_size=50"
   useEffect(() => {
     const fetchData = async () => {
