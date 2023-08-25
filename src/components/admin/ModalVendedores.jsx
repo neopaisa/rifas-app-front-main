@@ -5,6 +5,7 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import axios from "axios";
 import { API_URL } from "../../api/api";
 import { ToastContainer, toast } from "react-toastify";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 function ModalVendedores({ isOpen }) {
   const [show, setShow] = useState(false);
@@ -56,12 +57,17 @@ function ModalVendedores({ isOpen }) {
   return (
     <>
       <ToastContainer />
-      <button
-        onClick={handleShow}
-        className="bg-green-500 py-2 px-2 hover:bg-green-600 text-white font-bold mx-auto rounded-lg flex items-center justify-center my-2 "
+      <OverlayTrigger
+        placement="top"
+        overlay={<Tooltip>Agregar Vendedor</Tooltip>}
       >
-        Agregar Vendedor <AiOutlinePlusCircle className="mx-1" />
-      </button>
+        <button
+          onClick={handleShow}
+          className="bg-green-500 h-10  hover:bg-green-600 text-white font-bold mx-auto rounded flex items-center justify-center w-10 p-2 text-lg font-bold"
+        >
+          <AiOutlinePlusCircle className="mx-1" />
+        </button>
+      </OverlayTrigger>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

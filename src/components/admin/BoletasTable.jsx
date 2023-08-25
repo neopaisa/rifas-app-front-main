@@ -168,8 +168,9 @@ function BoletasTable() {
         phone={phone}
         valorPendiente={valorPendiente}
       />
-      <div className="ra-pagination-container">
-        <div className="m-1">
+      <div className="ra-pagination-container flex justify-center">
+        <div className="m-1 flex justify-center items-center">
+          <span className="mx-2 font-bold text-gray-500">  Buscar por número:</span>
           <input
             type="number"
             placeholder="Boleta"
@@ -184,7 +185,8 @@ function BoletasTable() {
             className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           /> */}
         </div>
-        <div className="d-flex mx-5">
+        <span className="mx-2 font-bold text-gray-500">  Buscar por página:</span>
+        <div className="d-flex mx-2">
           <BackButton e={backPage} page={page} />
           <div className=" text-gray-800">
             <input
@@ -192,7 +194,7 @@ function BoletasTable() {
               placeholder="Página"
               min="1"
               max="100"
-              className="ra-number-input"
+              className="ra-number-input2"
               onChange={(event) => searchPage(event.target.value)}
               value={page}
             />
