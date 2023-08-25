@@ -119,7 +119,7 @@ function ModalVendedores({ isOpen }) {
                   htmlFor="telefono"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Telefono
+                  Teléfono
                 </label>
                 <div className="mt-2">
                   <input
@@ -159,7 +159,7 @@ function ModalVendedores({ isOpen }) {
                   htmlFor="direccion"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Direccion
+                  Dirección
                 </label>
                 <div className="mt-2 mb-3">
                   <input
@@ -180,7 +180,7 @@ function ModalVendedores({ isOpen }) {
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
                 >
-                  Agregar Gasto
+                  Agregar Vendedor
                 </button>
               </div>
             </div>

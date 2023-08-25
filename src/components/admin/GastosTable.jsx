@@ -86,7 +86,7 @@ function GastosTable() {
       <ModalGastos isOpen={showModal} />
       <div className="ra-div-table">
         <table className="ra-main-table shadow">
-          <thead className="">
+          <thead className="fixed-div">
             <tr className="text-left">
               <th className="font-semibold text-sm uppercase px-6 py-4">
                 Titulo

@@ -21,10 +21,11 @@
 }
 .ra-number-input{
   padding: 1em;
-  max-width: 80px;
+  min-width: 100px;
   margin: 2px;
   appearance: none;
   margin: 0;
+  border-radius: 8px;
 }
 .ra-disponible{
   background-color: rgb(110, 204, 110);
@@ -99,6 +100,16 @@
 .ra-fade-animation {
   animation-name: fade;
   animation-duration: 100ms;
+}
+.fixed-div {
+  position: fixed;
+  top: 50px; /* Cambia esto según la posición que desees */
+  left: 50px; /* Cambia esto según la posición que desees */
+  width: 200px;
+  padding: 16px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 @keyframes fade {
   0% {

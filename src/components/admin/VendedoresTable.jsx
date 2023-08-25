@@ -2,12 +2,23 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { formatCurrency } from "../../utilities/strings";
 import ModalVendedores from "./ModalVendedores";
-
+import "./index.scss";
+import { AiFillPhone } from "react-icons/ai";
+import { AiFillEdit } from "react-icons/ai";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import { toUpperCaseString } from "../../utilities/strings";
+import EditarVendedorComponent from "./EditarVendedorComponent";
 const VendedoresTable = () => {
   const [vendedores, setVendedores] = useState([]);
   const [vendedorName, setVendedorName] = useState("");
   const [vendedorInfo, setVendedorInfo] = useState({});
   const [vendedorBoletas, setVendedorBoletas] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [value, setValue] = useState("");
+  const [user, setUser] = useState("");
+  const [adress, setAdress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [valorPendiente, setValorPendiente] = useState(0);
 
   const url = "https://rifa.cybriguard.com/vendedor/obtener";
   const vendedorURL = "https://rifa.cybriguard.com/vendedor/informacion/";
@@ -21,6 +32,7 @@ const VendedoresTable = () => {
           },
         });
         setVendedores(response.data);
+        setVendedorName(response.data[0].cedula);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -28,7 +40,6 @@ const VendedoresTable = () => {
 
     fetchData();
   }, []);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -60,84 +71,156 @@ const VendedoresTable = () => {
     };
     fetchData();
   }, [vendedorName]);
+
+  const handleOpen = (
+    numeroBoleta,
+    nombreUsuario,
+    direccionUsuario,
+    telefonoUsuario,
+    valorPendiente
+  ) => {
+    setValue(numeroBoleta);
+    setUser(nombreUsuario);
+    setAdress(direccionUsuario);
+    setPhone(telefonoUsuario);
+    setValorPendiente(valorPendiente);
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
   return (
-    <div>
-      <ModalVendedores isOpen={true} />
-      <div className="flex flex-wrap justify-evenly">
-        <div className=" bg-white shadow mx-2 my-1 rounded">
-          <table className="table-auto">
-            <thead>
-              <tr>
-                <th className="px-4 py-1">Lista de Vendedores</th>
-
-                {/* Agrega más encabezados según la estructura de datos de la API */}
-              </tr>
-            </thead>
-            <tbody>
-              {vendedores.map((vendedor) => (
-                <tr key={vendedor.index} className="border-t">
-                  <td
-                    className="px-4 py-1 cursor-pointer hover:bg-gray-100 h-fit"
-                    onClick={() => setVendedorName(vendedor.username)}
-                  >
+    <div className="ra-main-div-vendedores flex items-center flex-col">
+      <EditarVendedorComponent isOpen={isOpen}
+        handleClose={handleClose}
+        value={value}
+        user={user}
+        adress={adress}
+        phone={phone}
+        valorPendiente={valorPendiente}/>
+      <div className="flex items-center flex-col">
+      
+        <div className=" bg-white shadow mx-2 my-2 rounded flex flex-col">
+        <strong className="m-0 p-3 bg-blue-500 text-white rounded-t">Datos del Vendedor</strong>
+          <div className="bg-white p-3 rounded mx-2 my-2 text-[12px] text-gray-600 w-1/2">
+          <strong>Buscar Nombre:</strong>
+          <div className="flex items-center mb-2">
+            {
+              <select
+                className="bg-white rounded  border-2 border-gray-300 m-0 h-10 ra-vendedores-body"
+                value={vendedorName}
+                onChange={(e) => setVendedorName(e.target.value)}
+              >
+                {vendedores.map((vendedor) => (
+                  <option key={vendedor.index} value={vendedor.cedula}>
                     {vendedor.username}
-                  </td>
-                  {/* Agrega más celdas según la estructura de datos de la API */}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </option>
+                ))}
+              </select>
+            }
+            
+            <ModalVendedores isOpen={false} />
+          </div>
+            <div className="flex m-0">
+              <p className="font-bold m-0">C.C </p>
+              <p className="m-0 mx-1">{vendedorInfo.cedula}</p>
+            </div>
+            <div className="flex m-0">
+              <p className="font-bold flex justify-center items-center m-0">
+                <FaMapMarkerAlt />{" "}
+              </p>
+              <p className="mx-1 m-0">{vendedorInfo.ciudad}</p>
+            </div>
+            <div className="flex m-0">
+              <p className="font-bold flex justify-center items-center">
+                <AiFillPhone />
+              </p>
+              <p className="mx-1">{vendedorInfo.telefono}</p>
+            </div>
+          </div>
+          
         </div>
-
-        <div className="bg-white p-1 rounded shadow my-1">
-          <table style={{ fontSize: "10px" }}>
+            <h4 className="text-gray-500 my-3">Boletas Asociadas</h4>
+        <div className="ra-div-table ra-boletas-asociadas-table">
+          <table style={{ fontSize: "12px" }}>
             <thead>
               <tr>
-                <th className="px-1 py-0">Numero</th>
-                <th className="px-1 py-0">Estado</th>
-                <th className="px-1 py-0">Usuario</th>
-                <th className="px-1 py-0">Teléfono</th>
-                <th className="px-1 py-0">Dirección</th>
-                <th className="px-1 py-0">Precio</th>
-                <th className="px-1 py-0">Acumulado</th>
-                <th className="px-1 py-0">Valor Pendiente</th>
-                <th className="px-1 py-0">Comisión</th>
+                <th className="px-1 py-3">Numero</th>
+                <th className="px-1 py-3">Estado</th>
+                <th className="px-1 py-3">Usuario</th>
+                <th className="px-1 py-3">Teléfono</th>
+                <th className="px-1 py-3">Dirección</th>
+                <th className="px-1 py-3">Acumulado</th>
+                <th className="px-1 py-3">Valor Pendiente</th>
+                <th className="px-1 py-3">Comisión</th>
+                <th className="font-semibold text-sm uppercase px-6 py-1">
+                Editar
+              </th>
               </tr>
             </thead>
             <tbody>
               {vendedorBoletas.map((boleta) => (
                 <tr key={boleta.numero} className="border-t">
-                  <td className="px-1 py-0 cursor-pointer">{boleta.numero}</td>
-                  <td className="px-1 py-0 cursor-pointer">{boleta.estado}</td>
-                  <td className="px-1 py-0 cursor-pointer">{boleta.usuario}</td>
-                  <td className="px-1 py-0 cursor-pointer">
+                  <td
+                    className="px-1 py-3 cursor-pointer font-bold"
+                    data-label="Número"
+                  >
+                    {boleta.numero.toString().padStart(4, "0")}
+                  </td>
+                  <td
+                    className={
+                      "px-6 py-1 text-white font-bold " + "ra-" + boleta.estado
+                    }
+                    data-label="Estado"
+                  >
+                    {toUpperCaseString(boleta.estado)}
+                  </td>
+                  <td className="px-1 py-3 cursor-pointer" data-label="Usuario">
+                    {boleta.usuario}
+                  </td>
+                  <td
+                    className="px-1 py-3 cursor-pointer"
+                    data-label="Teléfono"
+                  >
                     {boleta.telefono}
                   </td>
-                  <td className="px-1 py-0 cursor-pointer">
+                  <td
+                    className="px-1 py-3 cursor-pointer"
+                    data-label="Dirección"
+                  >
                     {boleta.direccion}
                   </td>
-                  <td className="px-1 py-0 cursor-pointer">
-                    {formatCurrency(boleta.precio)}
-                  </td>
-                  <td className="px-1 py-0 cursor-pointer">
+                  <td
+                    className="px-1 py-3 cursor-pointer "
+                    data-label="Acumulado"
+                  >
                     {formatCurrency(boleta.acumulado)}
                   </td>
-                  <td className="px-1 py-0 cursor-pointer">
+                  <td
+                    className="px-1 py-3 cursor-pointer"
+                    data-label="Valor pendiente"
+                  >
                     {formatCurrency(boleta.valor_pendiente)}
                   </td>
-                  <td className="px-1 py-0 cursor-pointer">
+                  <td
+                    className="px-1 py-3 cursor-pointer"
+                    data-label="Comisión"
+                  >
                     {formatCurrency(boleta.comision)}
                   </td>
+                  <td className="px-6 py-1" data-label="Editar">
+            <button
+              className="px-2 py-1 text-gray-500 text-lg"
+              onClick={() => handleOpen(boleta.numero,boleta.usuario,boleta.direccion,boleta.telefono,boleta.valor_pendiente)}
+            >
+              <AiFillEdit />
+            </button>
+          </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
-        <div className="bg-white p-3 rounded shadow mx-2 my-1">
-          <h6>{vendedorInfo.username}</h6>
-          <p>{vendedorInfo.cedula}</p>
-          <p>{vendedorInfo.ciudad}</p>
-          <p>{vendedorInfo.telefono}</p>
         </div>
       </div>
     </div>

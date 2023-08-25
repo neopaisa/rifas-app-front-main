@@ -114,9 +114,6 @@ function BoletasTable() {
           >
             {toUpperCaseString(item.estado)}
           </td>
-          <td className="px-6 py-1" data-label="Precio">
-            {formatCurrency(item.precio)}
-          </td>
           <td className="px-6 py-1 bg-gray-100" data-label="Acumulado">
             {formatCurrency(item.acumulado)}
           </td>
@@ -212,9 +209,6 @@ function BoletasTable() {
               </th>
               <th className="font-semibold text-sm uppercase px-6 py-1">
                 Estado
-              </th>
-              <th className="font-semibold text-sm uppercase px-6 py-1">
-                Precio
               </th>
               <th className="font-semibold text-sm uppercase px-6 py-1">
                 Abonado
