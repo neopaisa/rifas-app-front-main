@@ -13,6 +13,7 @@ const VendedoresTable = () => {
   const [vendedorName, setVendedorName] = useState("");
   const [vendedorInfo, setVendedorInfo] = useState({});
   const [vendedorBoletas, setVendedorBoletas] = useState([]);
+  const [vendedorComision, setVendedorComision] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState("");
   const [user, setUser] = useState("");
@@ -23,6 +24,7 @@ const VendedoresTable = () => {
   const url = "https://rifa.cybriguard.com/vendedor/obtener";
   const vendedorURL = "https://rifa.cybriguard.com/vendedor/informacion/";
   const vendedorBoletasURL = "https://rifa.cybriguard.com/vendedor/boletas/";
+  const vendedorComisionURL = "https://rifa.cybriguard.com/contabilidad/ingreso/1088349108/?rifa_id=1&page=1&page_size=50"
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -71,6 +73,22 @@ const VendedoresTable = () => {
     };
     fetchData();
   }, [vendedorName]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(vendedorComisionURL, {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmFSb290IiwiZXhwIjozMjY1MDkzODkxfQ.nERn4p8tZp0Es6asf-jJpySxz2-LZuRA8-m8p0kUY5k`,
+          },
+        });
+        setVendedorComision(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleOpen = (
     numeroBoleta,
@@ -137,6 +155,9 @@ const VendedoresTable = () => {
                 <AiFillPhone />
               </p>
               <p className="mx-1">{vendedorInfo.telefono}</p>
+            </div>
+            <div>
+              <p>{vendedorComision.ingreso_bruto}</p>
             </div>
           </div>
           
