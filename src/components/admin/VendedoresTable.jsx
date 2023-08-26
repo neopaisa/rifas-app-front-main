@@ -156,8 +156,17 @@ const VendedoresTable = () => {
               </p>
               <p className="mx-1">{vendedorInfo.telefono}</p>
             </div>
-            <div>
-              <p>{vendedorComision.ingreso_bruto}</p>
+            <div className="flex m-0">
+              <p className="font-bold mr-1 my-0">Ingreso Bruto:</p>
+              <p className="flex m-0">{formatCurrency(vendedorInfo.ingreso_bruto)}</p>
+            </div>
+            <div className="flex m-0">
+              <p className="font-bold mr-1 my-0">Comisión:</p>
+              <p className="flex m-0">{formatCurrency(vendedorInfo.comision)}</p>
+            </div>
+            <div className="flex m-0">
+              <p className="font-bold mr-1 my-0">Total neto:</p>
+              <p className="flex m-0">{formatCurrency(vendedorInfo.total_neto)}</p>
             </div>
           </div>
           

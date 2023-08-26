@@ -25,7 +25,7 @@ function ModalVendedores({ isOpen }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const url = `${API_URL}vendedor/crear`;
+    const url = `${API_URL}ven/crear`;
 
     const data = {
       username: nombre,

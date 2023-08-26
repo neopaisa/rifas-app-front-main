@@ -1,16 +1,16 @@
 import React from "react";
 import AvatarNavbar from "../components/global/AvatarNavbar";
 import VendedoresTable from "../components/admin/VendedoresTable";
-import { useSelector, useDispatch } from 'react-redux'
-import { decrement,increment } from "../features/counter/counterSlice";
+//import { useSelector, useDispatch } from 'react-redux'
+//import { decrement,increment } from "../features/counter/counterSlice";
 import Footer from "../components/global/Footer";
 
 function VendedoresPage() {
-  const count = useSelector((state) => state.counter.value)
-  const dispatch = useDispatch()
+  //const count = useSelector((state) => state.counter.value)
+  //const dispatch = useDispatch()
   return (
     <div>
-      <div>
+      {/* <div>
         <button
           aria-label="Increment value"
           onClick={() => dispatch(increment())}
@@ -24,7 +24,7 @@ function VendedoresPage() {
         >
           Decrement
         </button>
-      </div>
+      </div> */}
       <AvatarNavbar />
       <div className="bg-gray-300 py-3">
       <VendedoresTable />

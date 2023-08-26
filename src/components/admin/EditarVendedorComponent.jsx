@@ -48,6 +48,7 @@ const EditarVendedorComponent = ({
       boleta_numero: parseInt(value),
       rifa_id: 1,
       direccion: direccion,
+      comision: comision,
     };
 
     const token =
