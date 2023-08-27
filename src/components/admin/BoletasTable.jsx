@@ -120,6 +120,9 @@ function BoletasTable() {
           <td className="px-6 py-1" data-label="Usuario">
             {item.usuario}
           </td>
+          <td className="px-6 py-1" data-label="Usuario">
+            {item.usuario_vendedor}
+          </td>
           <td className="px-6 py-1 bg-gray-100" data-label="Valor Pendiente">
             {formatCurrency(item.valor_pendiente)}
           </td>
@@ -203,7 +206,7 @@ function BoletasTable() {
         </div>
       </div>
       <div className="ra-div-table rounded">
-        <table className="ra-main-table shadow rounded">
+        <table className="ra-main-table shadow rounded font-size" style={{ fontSize: "12px" }}>
           <thead className="rounded">
             <tr className="text-left">
               <th className="font-semibold text-sm uppercase px-6 py-1">
@@ -217,6 +220,9 @@ function BoletasTable() {
               </th>
               <th className="font-semibold text-sm uppercase px-6 py-1">
                 Usuario
+              </th>
+              <th className="font-semibold text-sm uppercase px-6 py-1">
+                Vendedor
               </th>
               <th className="font-semibold text-sm uppercase px-6 py-1">
                 Valor pendiente

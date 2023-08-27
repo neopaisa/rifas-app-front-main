@@ -52,12 +52,6 @@ function GastosTable() {
           className="hover:bg-gray-200 hover:cursor-pointer ra-fade-animation"
           key={item.id}
         >
-          <td
-            className="px-6 py-4 ra-number-container bg-gray-100"
-            data-label="titulo"
-          >
-            {item.titulo}
-          </td>
           <td className="px-6 py-4 font-bold" data-label="descripcion">
             {toUpperCaseString(item.descripcion)}
           </td>
@@ -88,9 +82,6 @@ function GastosTable() {
         <table className="ra-main-table shadow">
           <thead className="w-96">
             <tr className="text-left">
-              <th className="font-semibold text-sm uppercase px-6 py-4">
-                Titulo
-              </th>
               <th className="font-semibold text-sm uppercase px-6 py-4">
                 Descripcion
               </th>

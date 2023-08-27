@@ -10,7 +10,6 @@ function ModalGastos({ isOpen }) {
   const today = new Date();
   const fechaHoy = today.toISOString().split("T")[0];
   const [show, setShow] = useState(false);
-  const [titulo, setTitulo] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [monto, setMonto] = useState(0);
   const [date, setDate] = useState(fechaHoy);
@@ -28,7 +27,6 @@ function ModalGastos({ isOpen }) {
     const url = `${API_URL}contabilidad/crear`;
 
     const data = {
-      titulo: titulo,
       descripcion: descripcion,
       fecha_gasto: date,
       monto: monto,
@@ -71,26 +69,6 @@ function ModalGastos({ isOpen }) {
         <Modal.Body>
           <form onSubmit={handleSubmit}>
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-              <div>
-                <label
-                  htmlFor="titulo"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Titulo
-                </label>
-                <div className="mt-2">
-                  <input
-                    value={titulo}
-                    onChange={(event) => setTitulo(event.target.value)}
-                    id="titulo"
-                    name="titulo"
-                    type="text"
-                    autoComplete="title"
-                    required
-                    className="block w-full  py-1.5 px-2 ra-input"
-                  />
-                </div>
-              </div>
 
               <div>
                 <label

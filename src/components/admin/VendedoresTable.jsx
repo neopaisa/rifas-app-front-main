@@ -8,6 +8,7 @@ import { AiFillEdit } from "react-icons/ai";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { toUpperCaseString } from "../../utilities/strings";
 import EditarVendedorComponent from "./EditarVendedorComponent";
+import AsociarBoletaComponent from "./AsociarBoletaComponent";
 const VendedoresTable = () => {
   const [vendedores, setVendedores] = useState([]);
   const [vendedorName, setVendedorName] = useState("");
@@ -20,6 +21,7 @@ const VendedoresTable = () => {
   const [adress, setAdress] = useState("");
   const [phone, setPhone] = useState("");
   const [valorPendiente, setValorPendiente] = useState(0);
+
 
   const url = "https://rifa.cybriguard.com/ven/obtener";
   const vendedorURL = "https://rifa.cybriguard.com/ven/informacion/";
@@ -51,6 +53,7 @@ const VendedoresTable = () => {
           },
         });
         setVendedorBoletas(response.data);
+        console.log('BOELTASSS VENDEDORRR',response.data)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -167,6 +170,12 @@ const VendedoresTable = () => {
             <div className="flex m-0">
               <p className="font-bold mr-1 my-0">Total neto:</p>
               <p className="flex m-0">{formatCurrency(vendedorInfo.total_neto)}</p>
+            </div>
+            <div className="flex m-0">
+              <p className="font-bold mr-1 my-0">N°:</p>
+              <p className="flex m-0">{vendedorInfo.numero_boleteria}</p>
+            </div>
+            <div> 
             </div>
           </div>
           

@@ -52,7 +52,7 @@ const IngresosTable = () => {
         className="px-6 py-1 ra-number-container bg-gray-100"
         data-label="Número"
       >
-        {ingreso.numero}
+        {ingreso.numero.toString().padStart(4, "0")}
       </td>
       <td
         className="px-6 py-1  bg-gray-100"
@@ -66,12 +66,12 @@ const IngresosTable = () => {
       <td className="px-6 py-1" data-label="Usuario">
         {ingreso.username}
       </td>
-      <td className="px-6 py-1 bg-gray-100" data-label="Teléfono">
+{/*       <td className="px-6 py-1 bg-gray-100" data-label="Teléfono">
         {ingreso.telefono}
       </td>
       <td className="px-6 py-1" data-label="Dirección">
         {ingreso.direccion}
-      </td>
+      </td> */}
     </tr>
   ));
 
@@ -102,12 +102,12 @@ const IngresosTable = () => {
               <th className="font-semibold text-sm uppercase px-6 py-2">
                 Usuario
               </th>
-              <th className="font-semibold text-sm uppercase px-6 py-2">
+              {/* <th className="font-semibold text-sm uppercase px-6 py-2">
                 Teléfono
               </th>
               <th className="font-semibold text-sm uppercase px-6 py-2">
                 Dirección
-              </th>
+              </th> */}
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 xl:w-9/12 sm:w-8/12">
