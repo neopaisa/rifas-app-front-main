@@ -8,7 +8,7 @@ import { AiFillEdit } from "react-icons/ai";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { toUpperCaseString } from "../../utilities/strings";
 import EditarVendedorComponent from "./EditarVendedorComponent";
-import AsociarBoletaComponent from "./AsociarBoletaComponent";
+
 const VendedoresTable = () => {
   const [vendedores, setVendedores] = useState([]);
   const [vendedorName, setVendedorName] = useState("");

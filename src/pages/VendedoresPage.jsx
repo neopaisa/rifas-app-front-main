@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AvatarNavbar from "../components/global/AvatarNavbar";
 import VendedoresTable from "../components/admin/VendedoresTable";
-//import { useSelector, useDispatch } from 'react-redux'
+import {useSelector} from 'react-redux'
 //import { decrement,increment } from "../features/counter/counterSlice";
 import Footer from "../components/global/Footer";
 
 function VendedoresPage() {
+  const [user,setUser] = useState({})
+  const user1 = useSelector((state) => state.user.value)
+  useEffect(()=>{
+    setUser(user1);
+  },[])
+  
   //const count = useSelector((state) => state.counter.value)
   //const dispatch = useDispatch()
   return (
     <div>
+      <button onClick={()=> console.log(user)}>CLICKK</button>
       {/* <div>
         <button
           aria-label="Increment value"

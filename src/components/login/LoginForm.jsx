@@ -1,12 +1,15 @@
 /* eslint-disable react/react-in-jsx-scope */
 
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux'; // Importa useSelector y useDispatch
 import { Navigate } from "react-router-dom";
 import axios from "axios";
+import { setUserData } from "../../features/login/userData";
 import logoM from "../../assets/logo/logoM.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./index.scss";
+
 function LoginForm() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
@@ -15,6 +18,9 @@ function LoginForm() {
   useEffect(() => {
     document.title = "Rifas App - Ingresar";
   }, []);
+
+  const dispatch = useDispatch(); // Agrega useDispatch
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -25,6 +31,9 @@ function LoginForm() {
           password: password,
         }
       );
+
+      // Despachar la acción para actualizar el estado del usuario
+      dispatch(setUserData(response.data));
       console.log(response.data);
       toast.success("Bien");
       setLoggedIn(true);
@@ -33,6 +42,11 @@ function LoginForm() {
       toast.error("Datos Incorrectos");
     }
   };
+
+  const user = useSelector((state) => state.user.value); // Acceder al estado del usuario
+
+  console.log('Información del usuario:', user); // Imprimir información del usuario en la consola
+
   if (loggedIn) {
     return <Navigate to="/admin" />;
   }

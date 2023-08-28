@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 import {
   NextButton,
   BackButton,
@@ -10,6 +11,8 @@ import ModalComponent from "./ModalComponent";
 import { toUpperCaseString, formatCurrency } from "../../utilities/strings";
 import { toast, ToastContainer } from "react-toastify";
 function BoletasTable() {
+  const userData = useSelector((state) => state.user.value);
+  const TOKEN = userData.access_token;
   const [value, setValue] = useState("");
   const [user, setUser] = useState("");
   const [adress, setAdress] = useState("");
@@ -50,7 +53,7 @@ function BoletasTable() {
         setLoading(true);
         const response = await axios.get(url, {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmFSb290IiwiZXhwIjozMjY1MDkzODkxfQ.nERn4p8tZp0Es6asf-jJpySxz2-LZuRA8-m8p0kUY5k`,
+            Authorization: `Bearer ${TOKEN}`,
           },
         });
         setAllBoletas(response.data);
