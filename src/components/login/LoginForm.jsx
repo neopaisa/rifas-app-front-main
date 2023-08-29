@@ -1,12 +1,13 @@
 /* eslint-disable react/react-in-jsx-scope */
 
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux'; // Importa useSelector y useDispatch
+import { useDispatch } from "react-redux"; // Importa useSelector y useDispatch
 import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { setUserData } from "../../features/login/userData";
 import logoM from "../../assets/logo/logoM.png";
 import { ToastContainer, toast } from "react-toastify";
+import { API_URL } from "../../api/api";
 import "react-toastify/dist/ReactToastify.css";
 import "./index.scss";
 
@@ -25,7 +26,7 @@ function LoginForm() {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "https://rifa.cybriguard.com/usuarios/login",
+        `${API_URL}usuarios/login`,
         {
           username: username,
           password: password,
@@ -43,9 +44,9 @@ function LoginForm() {
     }
   };
 
-  const user = useSelector((state) => state.user.value); // Acceder al estado del usuario
+  /* const user = useSelector((state) => state.user.value); // Acceder al estado del usuario
 
-  console.log('Información del usuario:', user); // Imprimir información del usuario en la consola
+  console.log('Información del usuario:', user); // Imprimir información del usuario en la consola */
 
   if (loggedIn) {
     return <Navigate to="/admin" />;
@@ -126,7 +127,7 @@ function LoginForm() {
             </div>
           </form>
 
-         {/*  <p className="mt-10 text-center text-sm text-gray-500">
+          {/*  <p className="mt-10 text-center text-sm text-gray-500">
             ¿No eres meimbro?-
             <a
               href="#"

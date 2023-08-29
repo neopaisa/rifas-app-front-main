@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { formatCurrency } from "../../utilities/strings";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 import ModalVendedores from "./ModalVendedores";
 import "./index.scss";
 import { AiFillPhone } from "react-icons/ai";
@@ -8,13 +9,16 @@ import { AiFillEdit } from "react-icons/ai";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { toUpperCaseString } from "../../utilities/strings";
 import EditarVendedorComponent from "./EditarVendedorComponent";
+import { API_URL } from "../../api/api";
 
 const VendedoresTable = () => {
+  const userData = useSelector((state) => state.user.value);
+  const TOKEN = userData.access_token;
   const [vendedores, setVendedores] = useState([]);
   const [vendedorName, setVendedorName] = useState("");
   const [vendedorInfo, setVendedorInfo] = useState({});
   const [vendedorBoletas, setVendedorBoletas] = useState([]);
-  const [vendedorComision, setVendedorComision] = useState({});
+  //const [vendedorComision, setVendedorComision] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState("");
   const [user, setUser] = useState("");
@@ -22,17 +26,16 @@ const VendedoresTable = () => {
   const [phone, setPhone] = useState("");
   const [valorPendiente, setValorPendiente] = useState(0);
 
-
-  const url = "https://rifa.cybriguard.com/ven/obtener";
-  const vendedorURL = "https://rifa.cybriguard.com/ven/informacion/";
-  const vendedorBoletasURL = "https://rifa.cybriguard.com/ven/boletas/";
-  const vendedorComisionURL = "https://rifa.cybriguard.com/contabilidad/ingreso/1088349108/?rifa_id=1&page=1&page_size=50"
+  const url = `${API_URL}ven/obtener`;
+  const vendedorURL = `${API_URL}ven/informacion/`;
+  const vendedorBoletasURL = `${API_URL}ven/boletas/`;
+  //const vendedorComisionURL = `${API_URL}contabilidad/ingreso/1088349108/?rifa_id=1&page=1&page_size=50`
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(url, {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmFSb290IiwiZXhwIjozMjY1MDkzODkxfQ.nERn4p8tZp0Es6asf-jJpySxz2-LZuRA8-m8p0kUY5k`,
+            Authorization: `Bearer ${TOKEN}`,
           },
         });
         setVendedores(response.data);
@@ -49,11 +52,11 @@ const VendedoresTable = () => {
       try {
         const response = await axios.get(vendedorBoletasURL + vendedorName, {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmFSb290IiwiZXhwIjozMjY1MDkzODkxfQ.nERn4p8tZp0Es6asf-jJpySxz2-LZuRA8-m8p0kUY5k`,
+            Authorization: `Bearer ${TOKEN}`,
           },
         });
         setVendedorBoletas(response.data);
-        console.log('BOELTASSS VENDEDORRR',response.data)
+        console.log("BOELTASSS VENDEDORRR", response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -66,7 +69,7 @@ const VendedoresTable = () => {
       try {
         const response = await axios.get(vendedorURL + vendedorName, {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmFSb290IiwiZXhwIjozMjY1MDkzODkxfQ.nERn4p8tZp0Es6asf-jJpySxz2-LZuRA8-m8p0kUY5k`,
+            Authorization: `Bearer ${TOKEN}`,
           },
         });
         setVendedorInfo(response.data);
@@ -77,12 +80,12 @@ const VendedoresTable = () => {
     fetchData();
   }, [vendedorName]);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(vendedorComisionURL, {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmFSb290IiwiZXhwIjozMjY1MDkzODkxfQ.nERn4p8tZp0Es6asf-jJpySxz2-LZuRA8-m8p0kUY5k`,
+            Authorization: `Bearer ${TOKEN}`,
           },
         });
         setVendedorComision(response.data);
@@ -92,7 +95,7 @@ const VendedoresTable = () => {
     };
     fetchData();
   }, []);
-
+ */
   const handleOpen = (
     numeroBoleta,
     nombreUsuario,
@@ -113,36 +116,39 @@ const VendedoresTable = () => {
   };
   return (
     <div className="ra-main-div-vendedores flex items-center flex-col">
-      <EditarVendedorComponent isOpen={isOpen}
+      <EditarVendedorComponent
+        isOpen={isOpen}
         handleClose={handleClose}
         value={value}
         user={user}
         adress={adress}
         phone={phone}
-        valorPendiente={valorPendiente}/>
+        valorPendiente={valorPendiente}
+      />
       <div className="flex items-center flex-col">
-      
         <div className=" bg-white shadow mx-2 my-2 rounded flex flex-col">
-        <strong className="m-0 p-3 bg-blue-500 text-white rounded-t">Datos del Vendedor</strong>
+          <strong className="m-0 p-3 bg-blue-500 text-white rounded-t">
+            Datos del Vendedor
+          </strong>
           <div className="bg-white p-3 rounded mx-2 my-2 text-[12px] text-gray-600 w-1/2">
-          <strong>Buscar Nombre:</strong>
-          <div className="flex items-center mb-2">
-            {
-              <select
-                className="bg-white rounded  border-2 border-gray-300 m-0 h-10 ra-vendedores-body"
-                value={vendedorName}
-                onChange={(e) => setVendedorName(e.target.value)}
-              >
-                {vendedores.map((vendedor) => (
-                  <option key={vendedor.index} value={vendedor.cedula}>
-                    {vendedor.username}
-                  </option>
-                ))}
-              </select>
-            }
-            
-            <ModalVendedores isOpen={false} />
-          </div>
+            <strong>Buscar Nombre:</strong>
+            <div className="flex items-center mb-2">
+              {
+                <select
+                  className="bg-white rounded  border-2 border-gray-300 m-0 h-10 ra-vendedores-body"
+                  value={vendedorName}
+                  onChange={(e) => setVendedorName(e.target.value)}
+                >
+                  {vendedores.map((vendedor) => (
+                    <option key={vendedor.index} value={vendedor.cedula}>
+                      {vendedor.username}
+                    </option>
+                  ))}
+                </select>
+              }
+
+              <ModalVendedores isOpen={false} />
+            </div>
             <div className="flex m-0">
               <p className="font-bold m-0">C.C </p>
               <p className="m-0 mx-1">{vendedorInfo.cedula}</p>
@@ -161,26 +167,30 @@ const VendedoresTable = () => {
             </div>
             <div className="flex m-0">
               <p className="font-bold mr-1 my-0">Ingreso Bruto:</p>
-              <p className="flex m-0">{formatCurrency(vendedorInfo.ingreso_bruto)}</p>
+              <p className="flex m-0">
+                {formatCurrency(vendedorInfo.ingreso_bruto)}
+              </p>
             </div>
             <div className="flex m-0">
               <p className="font-bold mr-1 my-0">Comisión:</p>
-              <p className="flex m-0">{formatCurrency(vendedorInfo.comision)}</p>
+              <p className="flex m-0">
+                {formatCurrency(vendedorInfo.comision)}
+              </p>
             </div>
             <div className="flex m-0">
               <p className="font-bold mr-1 my-0">Total neto:</p>
-              <p className="flex m-0">{formatCurrency(vendedorInfo.total_neto)}</p>
+              <p className="flex m-0">
+                {formatCurrency(vendedorInfo.total_neto)}
+              </p>
             </div>
             <div className="flex m-0">
               <p className="font-bold mr-1 my-0">N°:</p>
               <p className="flex m-0">{vendedorInfo.numero_boleteria}</p>
             </div>
-            <div> 
-            </div>
+            <div></div>
           </div>
-          
         </div>
-            <h4 className="text-gray-500 my-3">Boletas Asociadas</h4>
+        <h4 className="text-gray-500 my-3">Boletas Asociadas</h4>
         <div className="ra-div-table ra-boletas-asociadas-table">
           <table style={{ fontSize: "12px" }}>
             <thead>
@@ -194,8 +204,8 @@ const VendedoresTable = () => {
                 <th className="px-1 py-3">Valor Pendiente</th>
                 <th className="px-1 py-3">Comisión</th>
                 <th className="font-semibold text-sm uppercase px-6 py-1">
-                Editar
-              </th>
+                  Editar
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -249,13 +259,21 @@ const VendedoresTable = () => {
                     {formatCurrency(boleta.comision)}
                   </td>
                   <td className="px-6 py-1" data-label="Editar">
-            <button
-              className="px-2 py-1 text-gray-500 text-lg"
-              onClick={() => handleOpen(boleta.numero,boleta.usuario,boleta.direccion,boleta.telefono,boleta.valor_pendiente)}
-            >
-              <AiFillEdit />
-            </button>
-          </td>
+                    <button
+                      className="px-2 py-1 text-gray-500 text-lg"
+                      onClick={() =>
+                        handleOpen(
+                          boleta.numero,
+                          boleta.usuario,
+                          boleta.direccion,
+                          boleta.telefono,
+                          boleta.valor_pendiente
+                        )
+                      }
+                    >
+                      <AiFillEdit />
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

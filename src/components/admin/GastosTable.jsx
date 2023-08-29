@@ -6,13 +6,15 @@ import { toUpperCaseString } from "../../utilities/strings";
 import { formatCurrency } from "../../utilities/strings";
 import axios from "axios";
 import ModalGastos from "./ModalGastos";
-const TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmFSb290IiwiZXhwIjozMjY1MDkzODkxfQ.nERn4p8tZp0Es6asf-jJpySxz2-LZuRA8-m8p0kUY5k";
+import { API_URL } from "../../api/api";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 function GastosTable() {
+  const userData = useSelector((state) => state.user.value);
+  const TOKEN = userData.access_token;
   const [showModal, setShowModal] = useState(false);
   const [url, setUrl] = useState(
-    `https://rifa.cybriguard.com/gastos/?rifa_id=1&page=1&page_size=50`
+    `${API_URL}gastos/?rifa_id=1&page=1&page_size=50`
   );
   const [gastos, setGastos] = useState([]);
   const [loading, setLoading] = useState(false);

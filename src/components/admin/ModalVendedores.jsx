@@ -6,8 +6,10 @@ import axios from "axios";
 import { API_URL } from "../../api/api";
 import { ToastContainer, toast } from "react-toastify";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-
+import { useSelector } from "react-redux/es/hooks/useSelector";
 function ModalVendedores({ isOpen }) {
+  const userData = useSelector((state) => state.user.value);
+  const TOKEN = userData.access_token;
   const [show, setShow] = useState(false);
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
@@ -35,13 +37,10 @@ function ModalVendedores({ isOpen }) {
       ciudad: ciudad,
     };
 
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmFSb290IiwiZXhwIjozMjY1MDkzODkxfQ.nERn4p8tZp0Es6asf-jJpySxz2-LZuRA8-m8p0kUY5k";
-
     axios
       .post(url, data, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${TOKEN}`,
         },
       })
       .then((response) => {

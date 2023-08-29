@@ -5,8 +5,10 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import axios from "axios";
 import { API_URL } from "../../api/api";
 import { ToastContainer, toast } from "react-toastify";
-
+import { useSelector } from "react-redux/es/hooks/useSelector";
 function ModalGastos({ isOpen }) {
+  const userData = useSelector((state) => state.user.value);
+  const TOKEN = userData.access_token;
   const today = new Date();
   const fechaHoy = today.toISOString().split("T")[0];
   const [show, setShow] = useState(false);
@@ -33,13 +35,10 @@ function ModalGastos({ isOpen }) {
       boleta_rifa_id: 1,
     };
 
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmFSb290IiwiZXhwIjozMjY1MDkzODkxfQ.nERn4p8tZp0Es6asf-jJpySxz2-LZuRA8-m8p0kUY5k";
-
     axios
       .post(url, data, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${TOKEN}`,
         },
       })
       .then((response) => {
@@ -69,7 +68,6 @@ function ModalGastos({ isOpen }) {
         <Modal.Body>
           <form onSubmit={handleSubmit}>
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-
               <div>
                 <label
                   htmlFor="descipcion"

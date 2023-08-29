@@ -3,15 +3,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./index.scss";
 import { formatCurrency } from "../../utilities/strings";
-
+import { API_URL } from "../../api/api";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 const IngresosTable = () => {
+  const userData = useSelector((state) => state.user.value);
+  const TOKEN = userData.access_token;
   const [data, setData] = useState([]);
   const [url, setUrl] = useState(
-    "https://rifa.cybriguard.com/contabilidad/ingresos?rifa_id=1&page=1&page_size=50"
+    `${API_URL}contabilidad/ingresos?rifa_id=1&page=1&page_size=50`
   );
   const [page, setPage] = useState(1);
-  const TOKEN =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmFSb290IiwiZXhwIjozMjY1MDkzODkxfQ.nERn4p8tZp0Es6asf-jJpySxz2-LZuRA8-m8p0kUY5k";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,16 +34,14 @@ const IngresosTable = () => {
 
   useEffect(() => {
     setUrl(
-      "https://rifa.cybriguard.com/contabilidad/ingresos?rifa_id=1&page=" +
-        page +
-        "&page_size=50"
+      `${API_URL}contabilidad/ingresos?rifa_id=1&page=${page}&page_size=50`
     );
   }, [page]);
 
   function changePage(value) {
     setPage(value);
   }
-  
+
   const ingresoList = data.map((ingreso, index) => (
     <tr
       className="hover:bg-gray-200 hover:cursor-pointer ra-fade-animation"
@@ -54,10 +53,7 @@ const IngresosTable = () => {
       >
         {ingreso.numero.toString().padStart(4, "0")}
       </td>
-      <td
-        className="px-6 py-1  bg-gray-100"
-        data-label="Monto"
-      >
+      <td className="px-6 py-1  bg-gray-100" data-label="Monto">
         {formatCurrency(ingreso.monto)}
       </td>
       <td className="px-6 py-1 font-bold" data-label="Fecha">
@@ -66,7 +62,7 @@ const IngresosTable = () => {
       <td className="px-6 py-1" data-label="Usuario">
         {ingreso.username}
       </td>
-{/*       <td className="px-6 py-1 bg-gray-100" data-label="Teléfono">
+      {/*       <td className="px-6 py-1 bg-gray-100" data-label="Teléfono">
         {ingreso.telefono}
       </td>
       <td className="px-6 py-1" data-label="Dirección">

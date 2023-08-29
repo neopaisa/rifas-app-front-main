@@ -10,6 +10,7 @@ import { AiFillEdit } from "react-icons/ai";
 import ModalComponent from "./ModalComponent";
 import { toUpperCaseString, formatCurrency } from "../../utilities/strings";
 import { toast, ToastContainer } from "react-toastify";
+import { API_URL } from "../../api/api";
 function BoletasTable() {
   const userData = useSelector((state) => state.user.value);
   const TOKEN = userData.access_token;
@@ -22,7 +23,7 @@ function BoletasTable() {
   const [allBoletas, setAllBoletas] = useState([]);
   const [loading, setLoading] = useState("");
   const [url, setUrl] = useState(
-    "https://rifa.cybriguard.com/boletas/?rifa_id=1&page=1&page_size=100"
+    `${API_URL}boletas/?rifa_id=1&page=1&page_size=100`
   );
   //  MODAL FUCTIONS
   const [isOpen, setIsOpen] = useState(false);
@@ -71,40 +72,29 @@ function BoletasTable() {
   function nextPage() {
     setPage((prevPage) => prevPage + 1);
     setUrl(
-      "https://rifa.cybriguard.com/boletas/?rifa_id=1&page=" +
-        (parseInt(page) + 1) +
-        "&page_size=100"
+      `${API_URL}boletas/?rifa_id=1&page=${(parseInt(page) + 1)}&page_size=100` 
     );
   }
 
   function backPage() {
     setPage((prevPage) => prevPage - 1);
     setUrl(
-      "https://rifa.cybriguard.com/boletas/?rifa_id=1&page=" +
-        (parseInt(page) - 1) +
-        "&page_size=100"
+      `${API_URL}boletas/?rifa_id=1&page=${parseInt(page) - 1}page_size=100`
     );
   }
 
   function searchPage(value) {
     setPage(value);
-    setUrl(
-      "https://rifa.cybriguard.com/boletas/?rifa_id=1&page=" +
-        value +
-        "&page_size=100"
-    );
+    setUrl(`${API_URL}boletas/?rifa_id=1&page=${value}&page_size=100`);
   }
 
   function searchBoleta(value) {
-    setUrl("https://rifa.cybriguard.com/boletas/" + value);
+    setUrl(`${API_URL}boletas/${value}`);
   }
   const itemList = allBoletas.map((item) => {
     if (!loading) {
       return (
-        <tr
-          className="ra-fade-animation"
-          key={item.numero}
-        >
+        <tr className="ra-fade-animation" key={item.numero}>
           <td
             className="px-6 py-1 ra-number-container bg-gray-100"
             data-label="Número"
@@ -176,7 +166,10 @@ function BoletasTable() {
       />
       <div className="ra-pagination-container flex justify-center">
         <div className="m-1 flex justify-center items-center">
-          <span className="mx-2 font-bold text-gray-500">  Buscar por número:</span>
+          <span className="mx-2 font-bold text-gray-500">
+            {" "}
+            Buscar por número:
+          </span>
           <input
             type="number"
             placeholder="Boleta"
@@ -191,7 +184,10 @@ function BoletasTable() {
             className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           /> */}
         </div>
-        <span className="mx-2 font-bold text-gray-500">  Buscar por página:</span>
+        <span className="mx-2 font-bold text-gray-500">
+          {" "}
+          Buscar por página:
+        </span>
         <div className="d-flex mx-2">
           <BackButton e={backPage} page={page} />
           <div className=" text-gray-800">
@@ -209,7 +205,10 @@ function BoletasTable() {
         </div>
       </div>
       <div className="ra-div-table rounded">
-        <table className="ra-main-table shadow rounded font-size" style={{ fontSize: "12px" }}>
+        <table
+          className="ra-main-table shadow rounded font-size"
+          style={{ fontSize: "12px" }}
+        >
           <thead className="rounded">
             <tr className="text-left">
               <th className="font-semibold text-sm uppercase px-6 py-1">

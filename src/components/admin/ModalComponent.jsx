@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { API_URL } from "../../api/api";
 import { formatCurrency } from "../../utilities/strings";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+
 const ModalComponent = ({
   isOpen,
   handleClose,
@@ -21,6 +23,8 @@ const ModalComponent = ({
   const [usuario, setUsuario] = useState("");
   const [telefono, setTelefono] = useState(0);
   const [direccion, setDireccion] = useState("");
+  const userData = useSelector((state) => state.user.value);
+  const TOKEN = userData.access_token;
 
   useEffect(() => {
     if (!user) {
@@ -49,13 +53,10 @@ const ModalComponent = ({
       direccion: direccion,
     };
 
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmFSb290IiwiZXhwIjozMjY1MDkzODkxfQ.nERn4p8tZp0Es6asf-jJpySxz2-LZuRA8-m8p0kUY5k";
-
     axios
       .post(url, data, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${TOKEN}`,
         },
       })
       .then((response) => {
@@ -103,7 +104,7 @@ const ModalComponent = ({
                   className="block w-full  py-1.5 px-2 ra-input"
                 />
               </div>
-              <div className="flex justify-center items-center">
+              {/* <div className="flex justify-center items-center">
                 <p className="mr-2 p-3">Restar Cantidad</p>
                 <input
                   type="checkbox"
@@ -112,7 +113,7 @@ const ModalComponent = ({
                     e.target.checked ? setMonto(-1 * monto) : setMonto(monto)
                   }
                 />
-              </div>
+              </div> */}
             </div>
 
             <div>
