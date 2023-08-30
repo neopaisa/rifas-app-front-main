@@ -1,24 +1,42 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
 import { logout } from "../../features/login/userData";
 import logoM from "../../assets/logo/logoM.png";
 import { Link } from "react-router-dom";
 
-const navigation = [
-  { name: "General", href: "/admin" },
-  { name: "Vendedores", href: "/vendedores" },
-  { name: "Ingresos", href: "/ingresos" },
-  { name: "Gastos", href: "/gastos" },
-];
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 function AvatarNavbar() {
+  const userData = useSelector((state) => state.user.value);
+  const rol = userData.rol;
+  const [navigation, setNavigation] = useState([]);
+  const navigationAdmin = [
+    { name: "General", href: "/admin" },
+    { name: "Vendedores", href: "/vendedores" },
+    { name: "Boletas Disponibles", href: "/boletas-disponibles" },
+    { name: "Ingresos", href: "/ingresos" },
+    { name: "Gastos", href: "/gastos" },
+    { name: "Total", href: "/total" },
+  ];
+  const navigationUser = [
+    { name: "Boletas Disponibles", href: "/boletas-disponibles" },
+  ];
+
+  useEffect(()=>{
+    if (rol == 'root'){
+      setNavigation(navigationAdmin)
+    }else{
+      setNavigation(navigationUser)
+    }
+  },[])
+  
+
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logout());
@@ -42,16 +60,18 @@ function AvatarNavbar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="block h-8 w-auto lg:hidden"
-                    src={logoM}
-                    alt="Your Company"
-                  />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src={logoM}
-                    alt="Your Company"
-                  />
+                  <Link to="/">
+                    <img
+                      className="block h-8 w-auto lg:hidden"
+                      src={logoM}
+                      alt="Your Company"
+                    />
+                    <img
+                      className="hidden h-8 w-auto lg:block"
+                      src={logoM}
+                      alt="Your Company"
+                    />
+                  </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
@@ -127,7 +147,7 @@ function AvatarNavbar() {
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                          onClick={handleLogout}
+                            onClick={handleLogout}
                             to="/"
                             //onClick={handleLogout}
                             className={classNames(
