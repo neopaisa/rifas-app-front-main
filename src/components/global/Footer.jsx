@@ -5,7 +5,7 @@ function Footer() {
     <footer className="bg-neutral-600 text-center text-white dark:bg-neutral-600 dark:text-white lg:text-left">
       <div className="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-neutral-500 lg:justify-between">
         <div className="mr-12 hidden lg:block">
-          <img src={logoBlanco} alt="" />
+          <img src={logoBlanco} alt="" className="bg-red w-32" />
         </div>
         <div className="flex justify-center">
           <a href="#!" className="mr-6 text-white dark:text-neutral-200"></a>
