@@ -1,15 +1,19 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { Fragment, } from "react";
+import { Fragment } from "react";
+import { useState } from "react";
+import { Navigate } from "react-router-dom";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import logoM from '../../assets/logo/logoM.png'
+import { useDispatch } from "react-redux";
+import { logout } from "../../features/login/userData";
+import logoM from "../../assets/logo/logoM.png";
 import { Link } from "react-router-dom";
 
 const navigation = [
-  { name: "General", href: "/admin"},
-  { name: "Vendedores", href: "/vendedores"},
-  { name: "Ingresos", href: "/ingresos"},
-  { name: "Gastos", href: "/gastos"},
+  { name: "General", href: "/admin" },
+  { name: "Vendedores", href: "/vendedores" },
+  { name: "Ingresos", href: "/ingresos" },
+  { name: "Gastos", href: "/gastos" },
 ];
 
 function classNames(...classes) {
@@ -17,6 +21,12 @@ function classNames(...classes) {
 }
 
 function AvatarNavbar() {
+  const [loggedOut, setLoggedOut] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <Disclosure as="nav" className="bg-white">
       {({ open }) => (
@@ -121,7 +131,9 @@ function AvatarNavbar() {
                       <Menu.Item>
                         {({ active }) => (
                           <Link
+                          onClick={handleLogout}
                             to="/"
+                            //onClick={handleLogout}
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
