@@ -59,9 +59,6 @@ const IngresosTable = () => {
       <td className="px-6 py-1 font-bold" data-label="Fecha">
         {ingreso.fecha}
       </td>
-      <td className="px-6 py-1" data-label="Usuario">
-        {ingreso.username}
-      </td>
       {/*       <td className="px-6 py-1 bg-gray-100" data-label="Teléfono">
         {ingreso.telefono}
       </td>
@@ -94,9 +91,6 @@ const IngresosTable = () => {
               </th>
               <th className="font-semibold text-sm uppercase px-6 py-2">
                 Fecha
-              </th>
-              <th className="font-semibold text-sm uppercase px-6 py-2">
-                Usuario
               </th>
               {/* <th className="font-semibold text-sm uppercase px-6 py-2">
                 Teléfono

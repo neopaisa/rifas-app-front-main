@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import { AiOutlinePlusCircle } from "react-icons/ai";
+import { AiFillSwitcher } from "react-icons/ai";
 import axios from "axios";
 import { API_URL } from "../../api/api";
 import { ToastContainer, toast } from "react-toastify";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-function ModalVendedores({ isOpen }) {
+function AsociarBoletaComponent({ isOpen }) {
   const [show, setShow] = useState(false);
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
@@ -59,13 +59,14 @@ function ModalVendedores({ isOpen }) {
       <ToastContainer />
       <OverlayTrigger
         placement="top"
-        overlay={<Tooltip>Agregar Vendedor</Tooltip>}
+        overlay={<Tooltip>Asociar Boletas</Tooltip>}
       >
         <button
           onClick={handleShow}
-          className="bg-green-500 h-10  hover:bg-green-600 text-white font-bold mx-auto rounded flex items-center justify-center w-10 p-2 text-lg font-bold"
+          className="bg-blue-500 h-10  hover:bg-blue-600 text-white font-bold mx-auto rounded flex items-center justify-center w-1/2
+           p-2 text-sm mt-2"
         >
-          <AiOutlinePlusCircle className="mx-1" />
+          <AiFillSwitcher/>
         </button>
       </OverlayTrigger>
 
@@ -197,5 +198,5 @@ function ModalVendedores({ isOpen }) {
   );
 }
 
-export default ModalVendedores;
+export default AsociarBoletaComponent;
  

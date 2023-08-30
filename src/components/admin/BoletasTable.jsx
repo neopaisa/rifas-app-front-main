@@ -189,19 +189,19 @@ function BoletasTable() {
           Buscar por página:
         </span>
         <div className="d-flex mx-2">
-          <BackButton e={backPage} page={page} />
+          {/* <BackButton e={backPage} page={page} /> */}
           <div className=" text-gray-800">
             <input
               type="number"
               placeholder="Página"
               min="1"
               max="100"
-              className="ra-number-input2"
+              className="ra-number-input2 rounded"
               onChange={(event) => searchPage(event.target.value)}
               value={page}
             />
           </div>
-          <NextButton e={nextPage} page={page} />
+          {/* <NextButton e={nextPage} page={page} /> */}
         </div>
       </div>
       <div className="ra-div-table rounded">

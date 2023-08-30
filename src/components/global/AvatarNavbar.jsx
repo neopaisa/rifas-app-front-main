@@ -1,7 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Fragment } from "react";
-import { useState } from "react";
-import { Navigate } from "react-router-dom";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
@@ -21,9 +19,7 @@ function classNames(...classes) {
 }
 
 function AvatarNavbar() {
-  const [loggedOut, setLoggedOut] = useState(false);
   const dispatch = useDispatch();
-
   const handleLogout = () => {
     dispatch(logout());
   };

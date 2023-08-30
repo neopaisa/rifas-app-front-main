@@ -9,6 +9,7 @@ import { AiFillEdit } from "react-icons/ai";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { toUpperCaseString } from "../../utilities/strings";
 import EditarVendedorComponent from "./EditarVendedorComponent";
+import AsociarBoletaComponent from "./AsociarBoletaComponent";
 import { API_URL } from "../../api/api";
 
 const VendedoresTable = () => {
@@ -187,7 +188,9 @@ const VendedoresTable = () => {
               <p className="font-bold mr-1 my-0">N°:</p>
               <p className="flex m-0">{vendedorInfo.numero_boleteria}</p>
             </div>
-            <div></div>
+            <div>
+              <AsociarBoletaComponent/>
+            </div>
           </div>
         </div>
         <h4 className="text-gray-500 my-3">Boletas Asociadas</h4>
