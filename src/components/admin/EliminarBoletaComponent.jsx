@@ -2,33 +2,26 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { AiFillSwitcher, AiOutlinePlusCircle } from "react-icons/ai";
+import { AiFillSwitcher, AiOutlineDelete } from "react-icons/ai";
 import axios from "axios";
 import { API_URL } from "../../api/api";
 import { ToastContainer, toast } from "react-toastify";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-function AsociarBoletaComponent({ isOpen, cedula }) {
+function EliminarBoletaComponent({ isOpen, cedula }) {
   const userData = useSelector((state) => state.user.value);
   const TOKEN = userData.access_token;
   const [show, setShow] = useState(false);
   const [boleta, setBoleta] = useState(0);
-  const [listaBoletas, setListaBoletas] = useState([]);
+
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const agregarBoleta = (boleta) => {
-    // Crear una copia del estado actual y agregar la nueva boleta
-    const nuevaListaBoletas = [...listaBoletas, boleta];
-
-    // Actualizar el estado con la nueva lista de boletas
-    setListaBoletas(nuevaListaBoletas);
-  };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      agregarBoleta(boleta);
+      handleSubmit();
     }
   };
   useEffect(() => {
@@ -38,11 +31,11 @@ function AsociarBoletaComponent({ isOpen, cedula }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const url = `${API_URL}ven/asociar`;
+    const url = `${API_URL}ven/quitar`;
 
     const data = {
       cedula: cedula,
-      boletas: listaBoletas,
+      boleta_numero: boleta,
     };
 
     axios
@@ -67,23 +60,22 @@ function AsociarBoletaComponent({ isOpen, cedula }) {
       <ToastContainer />
       <OverlayTrigger
         placement="top"
-        overlay={<Tooltip>Asignar Boletas</Tooltip>}
+        overlay={<Tooltip>Eliminar Boletas</Tooltip>}
       >
         <button
           onClick={handleShow}
-          className="bg-blue-500 h-10  hover:bg-blue-600 text-white font-bold mx-auto rounded flex items-center justify-center
+          className="bg-red-500 h-10  hover:bg-red-600 text-white font-bold mx-auto rounded flex items-center justify-center
            p-2 mt-2"
         >
-          Asignar Boletas <AiFillSwitcher className="ml-2" />
+          Eliminar Boletas <AiFillSwitcher className="ml-2" />
         </button>
       </OverlayTrigger>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Asignar Boletas</Modal.Title>
+          <Modal.Title>Eliminar Boleta</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={handleSubmit}>
             <div className="sm:mx-auto sm:w-full sm:max-w-sm flex justify-center items-center">
               <input
                 type="number"
@@ -93,17 +85,16 @@ function AsociarBoletaComponent({ isOpen, cedula }) {
                 onKeyDown={handleKeyDown}
               />
               <button
-                onClick={() => agregarBoleta(boleta)}
-                className="bg-green-500 rounded p-2 ml-2 text-white"
+                onClick={handleSubmit}
+                className="bg-red-500 rounded p-2 ml-2 text-white"
               >
-                <AiOutlinePlusCircle />
+                <AiOutlineDelete />
               </button>
             </div>
-          </form>
         </Modal.Body>
       </Modal>
     </div>
   );
 }
 
-export default AsociarBoletaComponent;
+export default EliminarBoletaComponent;

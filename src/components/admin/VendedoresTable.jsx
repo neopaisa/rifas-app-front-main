@@ -11,6 +11,7 @@ import { toUpperCaseString } from "../../utilities/strings";
 import EditarVendedorComponent from "./EditarVendedorComponent";
 import AsociarBoletaComponent from "./AsociarBoletaComponent";
 import { API_URL } from "../../api/api";
+import EliminarBoletaComponent from "./EliminarBoletaComponent";
 
 const VendedoresTable = () => {
   const userData = useSelector((state) => state.user.value);
@@ -188,8 +189,9 @@ const VendedoresTable = () => {
               <p className="font-bold mr-1 my-0">N°:</p>
               <p className="flex m-0">{vendedorInfo.numero_boleteria}</p>
             </div>
-            <div>
+            <div className="flex">
               <AsociarBoletaComponent cedula={vendedorInfo.cedula}/>
+              <EliminarBoletaComponent cedula={vendedorInfo.cedula}/>
             </div>
           </div>
         </div>
