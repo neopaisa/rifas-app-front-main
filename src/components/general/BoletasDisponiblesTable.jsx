@@ -37,7 +37,7 @@ function BoletasDisponiblesTable() {
         const response = await axios.get(urlBoleta + boletaInd);
         console.log(response.data);
         setBoletaEstado(response.data[0]);
-        console.log('BOLETA ESTADOO,', boletaEstado)
+        console.log("BOLETA ESTADOO,", boletaEstado);
       } catch (error) {
         console.error(error);
       }
@@ -55,59 +55,63 @@ function BoletasDisponiblesTable() {
   }
 
   return (
-    <div className="ra-boletasgeneral-container">
-      <div>
+    <div className="ra-boletasgeneral-container bg-gray-300">
+      <div className="ra-buscarboleta-box rounded shadow">
+        <p className="font-bold text-gray-600 text-lg">Buscar boletas</p>
         <input
+          min="0"
           type="number"
           placeholder="Buscar boleta"
           value={boletaInd}
           onChange={(e) => setBoletaInd(e.target.value)}
         />
-        <h3>Estado: {boletaEstado.estado}</h3>
+        <p className="text-gray-500 mr-2 my-2"> Estado:  <strong className={boletaEstado.estado == "disponible"? "bg-green-600 text-white font-bold uppercase p-1 rounded": "bg-orange-600 text-white font-bold uppercase p-1 rounded-lg"}>{boletaEstado.estado}</strong></p>
       </div>
-      <div className="d-flex mx-5 my-2">
-        <BackButton e={backPage} page={page} />
-        <input
-          type="number"
-          placeholder="Página"
-          min="1"
-          className="ra-number-input"
-          onChange={(event) => setPage(event.target.value)}
-          value={page}
-        />
-        <NextButton e={nextPage} page={page} />
-      </div>
+      <div className="flex justify-center flex-col mx-5">
+        <div className="d-flex mx-5 my-2">
+          <BackButton e={backPage} page={page} />
+          <input
+            type="number"
+            placeholder="Página"
+            min="1"
+            className="ra-number-input"
+            onChange={(event) => setPage(event.target.value)}
+            value={page}
+          />
+          <NextButton e={nextPage} page={page} />
+        </div>
 
-      <table className="ra-main-table shadow">
-        <thead>
-          <tr>
-            <th className="font-semibold text-sm uppercase px-6 py-3">
-              Numero
-            </th>
-            <th className="font-semibold text-sm uppercase px-6 py-3">
-              Estado
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {allBoletas.map((item, index) => (
-            <tr key={index}>
-              <td className="font-semibold text-sm uppercase px-6 py-2 text-center">
-                {item.numero.toString().padStart(4, "0")}
-              </td>
-              <td
-                className={
-                  item.estado == "disponible"
-                    ? "ra-disponible uppercase text-sm text-white font-semibold text-center"
-                    : ""
-                }
-              >
-                {item.estado}
-              </td>
+        <table className="ra-main-table shadow bg-white">
+          <thead>
+            <tr>
+              <th className="font-semibold text-sm uppercase px-6 py-3">
+                Numero
+              </th>
+              <th className="font-semibold text-sm uppercase px-6 py-3">
+                Estado
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {allBoletas.map((item, index) => (
+              <tr key={index}>
+                <td className="font-semibold text-sm uppercase px-6 py-2 text-center">
+                  {item.numero.toString().padStart(4, "0")}
+                </td>
+                <td
+                  className={
+                    item.estado == "disponible"
+                      ? "ra-disponible uppercase text-sm text-white font-semibold text-center"
+                      : ""
+                  }
+                >
+                  {item.estado}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

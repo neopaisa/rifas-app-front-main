@@ -6,7 +6,7 @@ function BoletasDisponiblesPage() {
   return (
     <div>
       <AvatarNavbar/>
-      <BoletasDisponiblesTable/></div>
+      <BoletasDisponiblesTable /></div>
   )
 }
 

@@ -2,16 +2,25 @@
 
   .ra-boletasgeneral-container {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
     margin: 2em;
-    background-color: #fafafa;
     margin: 0;
   }
+.ra-buscarboleta-box{
+  margin: 2em;
+  background-color: #fafafa;
+  padding: 2em;
+  input{
+    padding: 5px;
+    font-size: 18px;
+    border: 1px solid gray;
+  }
+}
   .ra-number-input{
     padding: 1em;
-    max-width: 80px;
+    max-width: 50px;
     margin: 2px;
     appearance: none;
     margin: 0;
