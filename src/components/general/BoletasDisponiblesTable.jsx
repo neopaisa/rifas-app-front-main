@@ -8,14 +8,14 @@ import {
   BackButton,
   NextButton,
 } from "../atoms/PaginationButtons/PaginationButtons";
+import BuscadorBoletas from "./BuscadorBoletas";
 
 function BoletasDisponiblesTable() {
   const [allBoletas, setAllBoletas] = useState([{ numero: 1 }]);
   const [page, setPage] = useState(1);
-  const [boletaInd, setBoletaInd] = useState(0);
-  const [boletaEstado, setBoletaEstado] = useState("");
+
   const url = `${API_URL}boletas/disponibles?rifa_id=1&page=${page}&page_size=25`;
-  const urlBoleta = `${API_URL}boletas/general/`;
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,20 +31,7 @@ function BoletasDisponiblesTable() {
     fetchData();
   }, [page]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(urlBoleta + boletaInd);
-        console.log(response.data);
-        setBoletaEstado(response.data[0]);
-        console.log("BOLETA ESTADOO,", boletaEstado);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, [boletaInd]);
+  
 
   function nextPage() {
     setPage((prevPage) => prevPage + 1);
@@ -56,17 +43,7 @@ function BoletasDisponiblesTable() {
 
   return (
     <div className="ra-boletasgeneral-container bg-gray-300">
-      <div className="ra-buscarboleta-box rounded shadow">
-        <p className="font-bold text-gray-600 text-lg">Buscar boletas</p>
-        <input
-          min="0"
-          type="number"
-          placeholder="Buscar boleta"
-          value={boletaInd}
-          onChange={(e) => setBoletaInd(e.target.value)}
-        />
-        <p className="text-gray-500 mr-2 my-2"> Estado:  <strong className={boletaEstado.estado == "disponible"? "bg-green-600 text-white font-bold uppercase p-1 rounded": "bg-orange-600 text-white font-bold uppercase p-1 rounded-lg"}>{boletaEstado.estado}</strong></p>
-      </div>
+      <BuscadorBoletas/>
       <div className="flex justify-center flex-col mx-5">
         <div className="d-flex mx-5 my-2">
           <BackButton e={backPage} page={page} />

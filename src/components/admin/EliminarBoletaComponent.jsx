@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { AiFillSwitcher, AiOutlineDelete } from "react-icons/ai";
+import { AiFillDelete, AiOutlineDelete } from "react-icons/ai";
 import axios from "axios";
 import { API_URL } from "../../api/api";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,11 +13,17 @@ function EliminarBoletaComponent({ isOpen, cedula }) {
   const TOKEN = userData.access_token;
   const [show, setShow] = useState(false);
   const [boleta, setBoleta] = useState(0);
-
+  const [listaBoletas, setListaBoletas] = useState([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const eliminarBoleta = (boleta) => {
+    // Crear una copia del estado actual y agregar la nueva boleta
+    const nuevaListaBoletas = [...listaBoletas, boleta];
+    // Actualizar el estado con la nueva lista de boletas
+    setListaBoletas(nuevaListaBoletas);
+  };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -35,9 +41,9 @@ function EliminarBoletaComponent({ isOpen, cedula }) {
 
     const data = {
       cedula: cedula,
-      boleta_numero: boleta,
+      boletas: listaBoletas,
     };
-
+    console.log(data)
     axios
       .post(url, data, {
         headers: {
@@ -64,10 +70,10 @@ function EliminarBoletaComponent({ isOpen, cedula }) {
       >
         <button
           onClick={handleShow}
-          className="bg-red-500 h-10  hover:bg-red-600 text-white font-bold mx-auto rounded flex items-center justify-center
-           p-2 mt-2"
+          className="bg-red-500 h-10  hover:bg-red-600 text-white font-bold mx-1 rounded flex items-center justify-center
+           p-2 mt-2 "
         >
-          Eliminar Boletas <AiFillSwitcher className="ml-2" />
+          Eliminar<AiFillDelete className="ml-2" />
         </button>
       </OverlayTrigger>
 
@@ -76,21 +82,23 @@ function EliminarBoletaComponent({ isOpen, cedula }) {
           <Modal.Title>Eliminar Boleta</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <form onSubmit={handleSubmit}>
             <div className="sm:mx-auto sm:w-full sm:max-w-sm flex justify-center items-center">
               <input
                 type="number"
                 placeholder="# de Boleta"
-                onChange={(e) => setBoleta(e.target.value)}
+                onChange={(e) => setBoleta(parseInt(e.target.value))}
                 className="p-1 border border-gray-500 border-solid rounded"
                 onKeyDown={handleKeyDown}
               />
               <button
-                onClick={handleSubmit}
+                onClick={() => eliminarBoleta(boleta)}
                 className="bg-red-500 rounded p-2 ml-2 text-white"
               >
                 <AiOutlineDelete />
               </button>
             </div>
+          </form>
         </Modal.Body>
       </Modal>
     </div>

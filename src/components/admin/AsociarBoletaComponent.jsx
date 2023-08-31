@@ -7,6 +7,8 @@ import axios from "axios";
 import { API_URL } from "../../api/api";
 import { ToastContainer, toast } from "react-toastify";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import BoletasDisponiblesTable from "../general/BoletasDisponiblesTable";
+import BuscadorBoletas from "../general/BuscadorBoletas";
 
 function AsociarBoletaComponent({ isOpen, cedula }) {
   const userData = useSelector((state) => state.user.value);
@@ -74,7 +76,7 @@ function AsociarBoletaComponent({ isOpen, cedula }) {
           className="bg-blue-500 h-10  hover:bg-blue-600 text-white font-bold mx-auto rounded flex items-center justify-center
            p-2 mt-2"
         >
-          Asignar Boletas <AiFillSwitcher className="ml-2" />
+          Asignar<AiFillSwitcher className="ml-2" />
         </button>
       </OverlayTrigger>
 
@@ -86,6 +88,7 @@ function AsociarBoletaComponent({ isOpen, cedula }) {
           <form onSubmit={handleSubmit}>
             <div className="sm:mx-auto sm:w-full sm:max-w-sm flex justify-center items-center">
               <input
+                min={0}
                 type="number"
                 placeholder="# de Boleta"
                 onChange={(e) => setBoleta(e.target.value)}
@@ -100,6 +103,8 @@ function AsociarBoletaComponent({ isOpen, cedula }) {
               </button>
             </div>
           </form>
+
+          <BuscadorBoletas/>
         </Modal.Body>
       </Modal>
     </div>

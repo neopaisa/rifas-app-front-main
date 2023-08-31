@@ -8,6 +8,7 @@ import BoletasDisponiblesPage from "../pages/BoletasDisponiblesPage";
 import GastosPage from "../pages/GastosPage";
 import IngresosPage from "../pages/IngresosPage";
 import VendedoresPage from "../pages/VendedoresPage";
+import TotalPage from "../pages/TotalPage";
 
 export const router = createBrowserRouter([
   {
@@ -38,5 +39,9 @@ export const router = createBrowserRouter([
   {
     path: "/vendedores",
     element: <VendedoresPage/>,
+  },
+  {
+    path: "/total",
+    element: <TotalPage/>,
   },
 ]);
