@@ -7,7 +7,6 @@ import axios from "axios";
 import { API_URL } from "../../api/api";
 import { ToastContainer, toast } from "react-toastify";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import BoletasDisponiblesTable from "../general/BoletasDisponiblesTable";
 import BuscadorBoletas from "../general/BuscadorBoletas";
 
 function AsociarBoletaComponent({ isOpen, cedula }) {
