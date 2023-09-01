@@ -69,7 +69,6 @@ const ModalComponent = ({
         toast.error(errorDetail);
       });
     handleClose();
-    window.location.reload(true);
   };
 
   return (

@@ -45,29 +45,34 @@ function BoletasTable() {
 
   const handleClose = () => {
     setIsOpen(false);
+    
+    setTimeout(() => {+
+      setLoading(true)
+      fetchData();
+    }, 3000); // Delay of 3000 milliseconds (3 seconds)
+    setLoading(false)
   };
-
+  
   //API GET
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      });
+      setAllBoletas(response.data);
+      setLoading(false);
+      console.log(allBoletas);
+    } catch (error) {
+      console.error(error);
+      toast.error(error.response.data.detail);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(url, {
-          headers: {
-            Authorization: `Bearer ${TOKEN}`,
-          },
-        });
-        setAllBoletas(response.data);
-        setLoading(false);
-        console.log(allBoletas);
-      } catch (error) {
-        console.error(error);
-        toast.error(error.response.data.detail);
-      }
-    };
-
     fetchData();
-  }, [url, isOpen]);
+  }, [url]);
   //PAGINATION
   function nextPage() {
     setPage((prevPage) => prevPage + 1);
