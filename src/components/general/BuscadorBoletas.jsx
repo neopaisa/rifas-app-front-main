@@ -28,6 +28,7 @@ function BuscadorBoletas() {
           min="0"
           type="number"
           placeholder="Buscar boleta"
+          className="bg-white w-2/3"
           value={boletaInd}
           onChange={(e) => setBoletaInd(e.target.value)}
         />

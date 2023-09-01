@@ -65,7 +65,7 @@ function AsociarBoletaComponent({ isOpen, cedula }) {
 
   return (
     <div>
-      <ToastContainer />
+      
       <OverlayTrigger
         placement="top"
         overlay={<Tooltip>Asignar Boletas</Tooltip>}
@@ -106,6 +106,7 @@ function AsociarBoletaComponent({ isOpen, cedula }) {
           <BuscadorBoletas/>
         </Modal.Body>
       </Modal>
+      <ToastContainer />
     </div>
   );
 }
