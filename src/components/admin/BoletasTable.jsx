@@ -1,3 +1,4 @@
+/* eslint-disable no-async-promise-executor */
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import {
@@ -45,31 +46,50 @@ function BoletasTable() {
 
   const handleClose = () => {
     setIsOpen(false);
-    
-    setTimeout(() => {+
-      setLoading(true)
-      fetchData();
-    }, 3000); // Delay of 3000 milliseconds (3 seconds)
-    setLoading(false)
+    setLoading(true); // Start loading state
+    fetchData(); // Fetch data to update with the latest changes
+    setLoading(false); // End loading state
   };
   
+
   //API GET
   const fetchData = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(url, {
-        headers: {
-          Authorization: `Bearer ${TOKEN}`,
-        },
-      });
-      setAllBoletas(response.data);
-      setLoading(false);
-      console.log(allBoletas);
-    } catch (error) {
-      console.error(error);
-      toast.error(error.response.data.detail);
-    }
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${TOKEN}`,
+          },
+        });
+        setAllBoletas(response.data);
+        resolve(response.data);
+      } catch (error) {
+        console.error(error);
+        reject(error.response?.data?.detail || "An error occurred");
+      }
+    });
   };
+
+  useEffect(() => {
+    toast.promise(
+      fetchData(),
+      {
+        pending: "Cargando...",
+        success: " ",
+        error: "Error",
+      },
+      {
+        position: "top-right",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }
+    );
+  }, []);
+
   useEffect(() => {
     fetchData();
   }, [url]);
@@ -77,7 +97,7 @@ function BoletasTable() {
   function nextPage() {
     setPage((prevPage) => prevPage + 1);
     setUrl(
-      `${API_URL}boletas/?rifa_id=1&page=${(parseInt(page) + 1)}&page_size=100` 
+      `${API_URL}boletas/?rifa_id=1&page=${parseInt(page) + 1}&page_size=100`
     );
   }
 

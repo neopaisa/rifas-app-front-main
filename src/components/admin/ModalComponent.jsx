@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { API_URL } from "../../api/api";
@@ -98,7 +98,7 @@ const ModalComponent = ({
                     onChange={(event) => setMonto(event.target.value)}
                     id="cantidad"
                     name="cantidad"
-                    type="currency"
+                    type="number"
                     autoComplete="currency"
                     required
                     className="block w-full  py-1.5 px-2 ra-input"
@@ -220,7 +220,6 @@ const ModalComponent = ({
           </Button>
         </Modal.Footer>
       </Modal>
-      <ToastContainer />
     </>
   );
 };

@@ -4,10 +4,17 @@ import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import logoM from '../../assets/logo/logoM.png'
-const navigation = [
+
+/* const navigation = [
   { name: "Rifas", href: "#" },
   { name: "Servicios", href: "#" },
   { name: "Contacto", href: "#" },
+]; */
+
+const navigation = [
+  { name: "", href: "" },
+  { name: "", href: "" },
+  { name: "", href: "" },
 ];
 function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -141,7 +148,7 @@ function Hero() {
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
               Administra la contabilidad de tu empresa, lleva las estadísticas
-              de tus ventas y publica los resultados en tiempo real,
+              de tus ventas y publica los resultados en tiempo real.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
@@ -150,12 +157,12 @@ function Hero() {
               >
                 Empezar
               </Link>
-              <a
+              <Link to="/boletas-disponibles"
                 href="#"
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
-                Más información<span aria-hidden="true">→</span>
-              </a>
+                Boletas Disponibles<span aria-hidden="true">→</span>
+              </Link>
             </div>
           </div>
         </div>

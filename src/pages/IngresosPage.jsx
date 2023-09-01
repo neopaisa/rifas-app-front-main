@@ -1,6 +1,7 @@
 import React from "react";
 import AvatarNavbar from "../components/global/AvatarNavbar";
 import IngresosTable from "../components/admin/IngresosTable";
+import Footer from "../components/global/Footer";
 
 function IngresosPage() {
   return (
@@ -9,6 +10,7 @@ function IngresosPage() {
       <div className="bg-gray-300 py-3">
         <IngresosTable />
       </div>
+      <Footer />
     </div>
   );
 }
