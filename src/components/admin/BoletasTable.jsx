@@ -43,14 +43,15 @@ function BoletasTable() {
     setValorPendiente(valorPendiente);
     setIsOpen(true);
   };
-
   const handleClose = () => {
-    setIsOpen(false);
     setLoading(true); // Start loading state
-    fetchData(); // Fetch data to update with the latest changes
-    setLoading(false); // End loading state
+    // Introduce a delay of 3 seconds (3000 milliseconds) before fetching data
+    setTimeout(() => {
+      fetchData(); // Fetch data to update with the latest changes
+      setLoading(false); // End loading state
+    }, 3000);
+    setIsOpen(false);
   };
-  
 
   //API GET
   const fetchData = async () => {
