@@ -12,6 +12,7 @@ import EditarVendedorComponent from "./EditarVendedorComponent";
 import AsociarBoletaComponent from "./AsociarBoletaComponent";
 import { API_URL } from "../../api/api";
 import EliminarBoletaComponent from "./EliminarBoletaComponent";
+import EliminarVendedorComponent from "./EliminarVendedorComponent";
 
 const VendedoresTable = () => {
   const userData = useSelector((state) => state.user.value);
@@ -149,7 +150,8 @@ const VendedoresTable = () => {
                 </select>
               }
 
-              <ModalVendedores isOpen={false} />
+              <ModalVendedores isOpen={false}  />
+              <EliminarVendedorComponent isOpen={false} vendedorCedula={vendedorInfo.cedula} vendedorName={vendedorInfo.username}/>
             </div>
             <div className="flex m-0">
               <p className="font-bold m-0">C.C </p>

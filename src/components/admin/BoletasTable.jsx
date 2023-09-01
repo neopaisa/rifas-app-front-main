@@ -48,9 +48,11 @@ function BoletasTable() {
     // Introduce a delay of 3 seconds (3000 milliseconds) before fetching data
     setTimeout(() => {
       fetchData(); // Fetch data to update with the latest changes
-      setLoading(false); // End loading state
-    }, 3000);
+       // End loading state
+       setLoading(false);
+    }, 2000);
     setIsOpen(false);
+    
   };
 
   //API GET
@@ -64,6 +66,7 @@ function BoletasTable() {
         });
         setAllBoletas(response.data);
         resolve(response.data);
+        console.log(response.data)
       } catch (error) {
         console.error(error);
         reject(error.response?.data?.detail || "An error occurred");
