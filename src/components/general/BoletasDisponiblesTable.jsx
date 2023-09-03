@@ -40,7 +40,7 @@ function BoletasDisponiblesTable() {
   function backPage() {
     setPage((prevPage) => prevPage - 1);
   }
-
+ 
   return (
     <div className="ra-boletasgeneral-container bg-gray-300">
       <BuscadorBoletas/>
