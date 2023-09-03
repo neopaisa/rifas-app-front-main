@@ -66,7 +66,7 @@ function BoletasTable() {
         });
         setAllBoletas(response.data);
         resolve(response.data);
-        console.log(response.data)
+        //console.log(response.data)
       } catch (error) {
         console.error(error);
         reject(error.response?.data?.detail || "An error occurred");

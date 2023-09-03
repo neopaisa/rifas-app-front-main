@@ -43,8 +43,8 @@ function ModalVendedores({ isOpen }) {
           Authorization: `Bearer ${TOKEN}`,
         },
       })
-      .then((response) => {
-        console.log("Respuesta del servidor:", response.data);
+      .then(() => {
+        //console.log("Respuesta del servidor:", response.data);
         toast.success("Datos Actualizados Correctamente");
       })
       .catch((error) => {

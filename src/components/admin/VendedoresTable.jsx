@@ -50,21 +50,23 @@ const VendedoresTable = () => {
 
     fetchData();
   }, []);
+
+  const fetchBoletasData = async () => {
+    try {
+      const response = await axios.get(vendedorBoletasURL + vendedorName, {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      });
+      setVendedorBoletas(response.data);
+      //console.log("BOELTASSS VENDEDORRR", response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(vendedorBoletasURL + vendedorName, {
-          headers: {
-            Authorization: `Bearer ${TOKEN}`,
-          },
-        });
-        setVendedorBoletas(response.data);
-        console.log("BOELTASSS VENDEDORRR", response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
+    fetchBoletasData();
   }, [vendedorName]);
 
   useEffect(() => {
@@ -115,6 +117,11 @@ const VendedoresTable = () => {
   };
 
   const handleClose = () => {
+    // Introduce a delay of 3 seconds (3000 milliseconds) before fetching data
+    setTimeout(() => {
+      fetchBoletasData(); // Fetch data to update with the latest changes
+       // End loading state
+    }, 2000);
     setIsOpen(false);
   };
   return (

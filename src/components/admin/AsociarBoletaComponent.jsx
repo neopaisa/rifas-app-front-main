@@ -53,7 +53,7 @@ function AsociarBoletaComponent({ isOpen, cedula }) {
         },
       })
       .then((response) => {
-        console.log("Respuesta del servidor:", response.data);
+        //console.log("Respuesta del servidor:", response.data);
         toast.info(response.data.mensaje + `  N° ${boleta}`);
       })
       .catch((error) => {

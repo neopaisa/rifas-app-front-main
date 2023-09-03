@@ -44,7 +44,7 @@ function GastosTable() {
 
   useEffect(() => {
     console.log("gastos actualizado:", gastos);
-    console.log(itemList);
+    //console.log(itemList);
   }, [gastos]);
 
   const itemList = gastos.map((item) => {

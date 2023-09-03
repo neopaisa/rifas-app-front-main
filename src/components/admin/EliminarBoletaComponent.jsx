@@ -43,7 +43,7 @@ function EliminarBoletaComponent({ isOpen, cedula }) {
       cedula: cedula,
       boletas: listaBoletas,
     };
-    console.log(data)
+    //console.log(data)
     axios
       .post(url, data, {
         headers: {
@@ -51,7 +51,7 @@ function EliminarBoletaComponent({ isOpen, cedula }) {
         },
       })
       .then((response) => {
-        console.log("Respuesta del servidor:", response.data);
+        //console.log("Respuesta del servidor:", response.data);
         toast.success(response.data.mensaje + `  N° ${boleta}`);
       })
       .catch((error) => {
