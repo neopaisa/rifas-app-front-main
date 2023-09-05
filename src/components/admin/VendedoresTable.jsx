@@ -21,7 +21,7 @@ const VendedoresTable = () => {
   const [vendedorName, setVendedorName] = useState("");
   const [vendedorInfo, setVendedorInfo] = useState({});
   const [vendedorBoletas, setVendedorBoletas] = useState([]);
-  const [boleta, setBoleta] = useState(0)
+  const [boleta, setBoleta] = useState("")
   //const [vendedorComision, setVendedorComision] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState("");
@@ -32,7 +32,7 @@ const VendedoresTable = () => {
 
   const url = `${API_URL}ven/obtener`;
   const vendedorURL = `${API_URL}ven/informacion/`;
-  const vendedorBoletasURL = `${API_URL}ven/boletas/`;
+  const vendedorBoletasURL = `${API_URL}ven/boletas/${vendedorName}`;
   //const vendedorComisionURL = `${API_URL}contabilidad/ingreso/1088349108/?rifa_id=1&page=1&page_size=50`
   const fetchVendedoresList = async () => {
     try {
@@ -54,7 +54,7 @@ const VendedoresTable = () => {
 
   const fetchBoletasData = async () => {
     try {
-      const response = await axios.get(vendedorBoletasURL + vendedorName, {
+      const response = await axios.get(vendedorBoletasURL, {
         headers: {
           Authorization: `Bearer ${TOKEN}`,
         },
@@ -68,7 +68,7 @@ const VendedoresTable = () => {
 
   useEffect(() => {
     fetchBoletasData();
-  }, [vendedorName]);
+  }, [vendedorName,boleta]);
 
 
   const fetchVendedoresData = async () => {
@@ -87,6 +87,10 @@ const VendedoresTable = () => {
   useEffect(() => {
     fetchVendedoresData();
   }, [vendedorName]);
+
+  useEffect(() => {
+    fetchBoletasData();
+  }, [boleta]);
 
   /*   useEffect(() => {
     const fetchData = async () => {
