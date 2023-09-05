@@ -21,6 +21,7 @@ const VendedoresTable = () => {
   const [vendedorName, setVendedorName] = useState("");
   const [vendedorInfo, setVendedorInfo] = useState({});
   const [vendedorBoletas, setVendedorBoletas] = useState([]);
+  const [boleta, setBoleta] = useState(0)
   //const [vendedorComision, setVendedorComision] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState("");
@@ -33,22 +34,22 @@ const VendedoresTable = () => {
   const vendedorURL = `${API_URL}ven/informacion/`;
   const vendedorBoletasURL = `${API_URL}ven/boletas/`;
   //const vendedorComisionURL = `${API_URL}contabilidad/ingreso/1088349108/?rifa_id=1&page=1&page_size=50`
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(url, {
-          headers: {
-            Authorization: `Bearer ${TOKEN}`,
-          },
-        });
-        setVendedores(response.data);
-        setVendedorName(response.data[0].cedula);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  const fetchVendedoresList = async () => {
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      });
+      setVendedores(response.data);
+      setVendedorName(response.data[0].cedula);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
-    fetchData();
+  useEffect(() => {
+    fetchVendedoresList();
   }, []);
 
   const fetchBoletasData = async () => {
@@ -69,20 +70,22 @@ const VendedoresTable = () => {
     fetchBoletasData();
   }, [vendedorName]);
 
+
+  const fetchVendedoresData = async () => {
+    try {
+      const response = await axios.get(vendedorURL + vendedorName, {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      });
+      setVendedorInfo(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(vendedorURL + vendedorName, {
-          headers: {
-            Authorization: `Bearer ${TOKEN}`,
-          },
-        });
-        setVendedorInfo(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
+    fetchVendedoresData();
   }, [vendedorName]);
 
   /*   useEffect(() => {
@@ -119,7 +122,8 @@ const VendedoresTable = () => {
   const handleClose = () => {
     // Introduce a delay of 3 seconds (3000 milliseconds) before fetching data
     setTimeout(() => {
-      fetchBoletasData(); // Fetch data to update with the latest changes
+      fetchBoletasData(); 
+      fetchVendedoresData();// Fetch data to update with the latest changes
        // End loading state
     }, 2000);
     setIsOpen(false);
@@ -205,6 +209,8 @@ const VendedoresTable = () => {
           </div>
         </div>
         <h4 className="text-gray-500 my-3">Boletas Asociadas</h4>
+
+        <input type="number" placeholder="buscar boleta" value={boleta} onChange={(e) =>setBoleta(e.target.value)}/>
         <div className="ra-div-table ra-boletas-asociadas-table">
           <table style={{ fontSize: "12px" }}>
             <thead>

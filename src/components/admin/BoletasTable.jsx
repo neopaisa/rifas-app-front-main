@@ -24,7 +24,7 @@ function BoletasTable() {
   const [allBoletas, setAllBoletas] = useState([]);
   const [loading, setLoading] = useState("");
   const [url, setUrl] = useState(
-    `${API_URL}boletas/?rifa_id=1&page=1&page_size=100`
+    `${API_URL}boletas/?rifa_id=1&page=1&page_size=800`
   );
   //  MODAL FUCTIONS
   const [isOpen, setIsOpen] = useState(false);
@@ -101,20 +101,20 @@ function BoletasTable() {
   function nextPage() {
     setPage((prevPage) => prevPage + 1);
     setUrl(
-      `${API_URL}boletas/?rifa_id=1&page=${parseInt(page) + 1}&page_size=100`
+      `${API_URL}boletas/?rifa_id=1&page=${parseInt(page) + 1}&page_size=800`
     );
   }
 
   function backPage() {
     setPage((prevPage) => prevPage - 1);
     setUrl(
-      `${API_URL}boletas/?rifa_id=1&page=${parseInt(page) - 1}page_size=100`
+      `${API_URL}boletas/?rifa_id=1&page=${parseInt(page) - 1}page_size=800`
     );
   }
 
   function searchPage(value) {
     setPage(value);
-    setUrl(`${API_URL}boletas/?rifa_id=1&page=${value}&page_size=100`);
+    setUrl(`${API_URL}boletas/?rifa_id=1&page=${value}&page_size=800`);
   }
 
   function searchBoleta(value) {
@@ -148,7 +148,7 @@ function BoletasTable() {
           <td className="px-6 py-1 bg-gray-100" data-label="Valor Pendiente">
             {formatCurrency(item.valor_pendiente)}
           </td>
-          <td className="px-6 py-1" data-label="Editar">
+          {/* <td className="px-6 py-1" data-label="Editar">
             <button
               className="px-2 py-1 text-gray-500 text-lg"
               onClick={() =>
@@ -163,7 +163,7 @@ function BoletasTable() {
             >
               <AiFillEdit />
             </button>
-          </td>
+          </td> */}
         </tr>
       );
     } else {
@@ -258,9 +258,9 @@ function BoletasTable() {
               <th className="font-semibold text-sm uppercase px-6 py-1">
                 Valor pendiente
               </th>
-              <th className="font-semibold text-sm uppercase px-6 py-1">
+              {/* <th className="font-semibold text-sm uppercase px-6 py-1">
                 Editar
-              </th>
+              </th> */}
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 xl:w-9/12 sm:w-8/12">

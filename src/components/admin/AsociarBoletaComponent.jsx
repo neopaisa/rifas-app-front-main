@@ -54,7 +54,17 @@ function AsociarBoletaComponent({ isOpen, cedula }) {
       })
       .then((response) => {
         //console.log("Respuesta del servidor:", response.data);
-        toast.info(response.data.mensaje + `  N° ${boleta}`);
+        if (response.data.mensaje[0] == "0"){
+          toast.error('Boletas No asociadas',{
+            autoClose: 1000, 
+          });
+        }else{
+          toast.success(response.data.mensaje + `  N° ${boleta}`,{
+            autoClose: 1000, 
+          });
+        }
+        
+        setBoleta(0)
       })
       .catch((error) => {
         console.error("Error al hacer la solicitud:", error);
