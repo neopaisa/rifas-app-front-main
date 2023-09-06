@@ -16,7 +16,11 @@ function ModalGastos({ isOpen }) {
   const [monto, setMonto] = useState(0);
   const [date, setDate] = useState(fechaHoy);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () =>{
+    setShow(false);
+    window.location.reload();
+  } 
+
   const handleShow = () => setShow(true);
 
   useEffect(() => {
@@ -50,6 +54,7 @@ function ModalGastos({ isOpen }) {
         var errorDetail = error.response.data.detail;
         toast.error(errorDetail);
       });
+      handleClose();
   };
   return (
     <>

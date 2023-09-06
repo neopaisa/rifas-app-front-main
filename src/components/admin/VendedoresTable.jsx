@@ -234,7 +234,7 @@ const VendedoresTable = () => {
         </div>
         <h4 className="text-gray-500 my-3">Boletas Asociadas</h4>
 
-        <input type="number" placeholder="buscar boleta" value={boleta} onChange={(e) =>setBoleta(e.target.value)}/>
+        <input type="number" placeholder="Buscar boleta" value={boleta} onChange={(e) =>setBoleta(e.target.value)} className="p-2 rounded shadow m-1"/>
         <div className="ra-div-table ra-boletas-asociadas-table">
           <table style={{ fontSize: "12px" }}>
             <thead>

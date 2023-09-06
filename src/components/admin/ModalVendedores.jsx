@@ -17,7 +17,11 @@ function ModalVendedores({ isOpen }) {
   const [direccion, setDireccion] = useState("");
   const [cedula, setCedula] = useState("");
 
-  const handleClose = () => setShow(false);
+  const handleClose = () =>{
+    setShow(false) 
+    window.location.reload();
+  };
+  
   const handleShow = () => setShow(true);
 
   useEffect(() => {
