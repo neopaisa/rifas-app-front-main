@@ -7,7 +7,6 @@ import {
 } from "../atoms/PaginationButtons/PaginationButtons";
 import LoadingSpinner from "../atoms/PaginationButtons/LoadingSpinner";
 import axios from "axios";
-import { AiFillEdit } from "react-icons/ai";
 import ModalComponent from "./ModalComponent";
 import { toUpperCaseString, formatCurrency } from "../../utilities/strings";
 import { toast, ToastContainer } from "react-toastify";
