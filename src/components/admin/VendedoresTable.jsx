@@ -32,7 +32,7 @@ const VendedoresTable = () => {
 
   const url = `${API_URL}ven/obtener`;
   const vendedorURL = `${API_URL}ven/informacion/`;
-  const vendedorBoletasURL = `${API_URL}ven/boletas/${vendedorName}`;
+  
   const vendedorBoletaUnitaria = `${API_URL}boletas/vendedor/${vendedorName}`
   //const vendedorComisionURL = `${API_URL}contabilidad/ingreso/1088349108/?rifa_id=1&page=1&page_size=50`
   const fetchVendedoresList = async () => {
@@ -54,6 +54,7 @@ const VendedoresTable = () => {
   }, []);
 
   const fetchBoletasData = async () => {
+    const vendedorBoletasURL = `${API_URL}ven/boletas/${vendedorName}`;
     try {
       const response = await axios.get(vendedorBoletasURL, {
         headers: {
@@ -68,9 +69,10 @@ const VendedoresTable = () => {
   };
 
   useEffect(()=>{
+    const vendedorBoletasURL = `${API_URL}ven/boletas/${vendedorName}`;
     const fetchBoletasData = async () => {
       try {
-        const response = await axios.get(vendedorBoletaUnitaria + '/' + boleta, {
+        const response = await axios.get(vendedorBoletasURL + '/' + boleta, {
           headers: {
             Authorization: `Bearer ${TOKEN}`,
           },
