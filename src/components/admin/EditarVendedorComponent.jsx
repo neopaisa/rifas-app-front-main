@@ -75,7 +75,7 @@ const EditarVendedorComponent = ({
     <Modal show={isOpen} onHide={handleClose}>
       <ToastContainer />
       <Modal.Header closeButton>
-        <Modal.Title>Agregar Abono Rifa # {value}</Modal.Title>
+        <Modal.Title>Agregar Abono Rifa # {value.toString().padStart(4, "0")}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div>
