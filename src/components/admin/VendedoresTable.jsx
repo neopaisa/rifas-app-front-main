@@ -33,6 +33,7 @@ const VendedoresTable = () => {
   const url = `${API_URL}ven/obtener`;
   const vendedorURL = `${API_URL}ven/informacion/`;
   const vendedorBoletasURL = `${API_URL}ven/boletas/${vendedorName}`;
+  const vendedorBoletaUnitaria = `${API_URL}boletas/vendedor/${vendedorName}`
   //const vendedorComisionURL = `${API_URL}contabilidad/ingreso/1088349108/?rifa_id=1&page=1&page_size=50`
   const fetchVendedoresList = async () => {
     try {
@@ -66,9 +67,28 @@ const VendedoresTable = () => {
     }
   };
 
+  useEffect(()=>{
+    const fetchBoletasData = async () => {
+      try {
+        const response = await axios.get(vendedorBoletaUnitaria + '/' + boleta, {
+          headers: {
+            Authorization: `Bearer ${TOKEN}`,
+          },
+        });
+        console.log('entraaaa')
+        setVendedorBoletas(response.data);
+        //console.log("BOELTASSS VENDEDORRR", response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setVendedorBoletas([])
+      }
+    };
+    fetchBoletasData();
+  },[boleta])
+
   useEffect(() => {
     fetchBoletasData();
-  }, [vendedorName,boleta]);
+  }, [vendedorName]);
 
 
   const fetchVendedoresData = async () => {
@@ -165,7 +185,7 @@ const VendedoresTable = () => {
                 </select>
               }
 
-              <ModalVendedores isOpen={false}  />
+              <ModalVendedores isOpen={false} handleClose={handleClose} />
               <EliminarVendedorComponent isOpen={false} vendedorCedula={vendedorInfo.cedula} vendedorName={vendedorInfo.username}/>
             </div>
             <div className="flex m-0">
