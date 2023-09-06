@@ -16,7 +16,10 @@ function AsociarBoletaComponent({ isOpen, cedula }) {
   const [boleta, setBoleta] = useState(0);
   const [listaBoletas, setListaBoletas] = useState([]);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () =>{
+    setShow(false);
+    window.location.reload()
+  } 
   const handleShow = () => setShow(true);
 
   const agregarBoleta = (boleta) => {
