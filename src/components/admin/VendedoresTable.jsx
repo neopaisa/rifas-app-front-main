@@ -229,8 +229,8 @@ const VendedoresTable = () => {
               <p className="flex m-0">{vendedorInfo.numero_boleteria}</p>
             </div>
             <div className="flex">
-              <AsociarBoletaComponent cedula={vendedorInfo.cedula}/>
-              <EliminarBoletaComponent cedula={vendedorInfo.cedula}/>
+              <AsociarBoletaComponent handleCloseMain={handleClose} cedula={vendedorInfo.cedula}/>
+              <EliminarBoletaComponent handleCloseMain={handleClose} cedula={vendedorInfo.cedula}/>
             </div>
           </div>
         </div>

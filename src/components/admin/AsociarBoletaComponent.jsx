@@ -9,7 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import BuscadorBoletas from "../general/BuscadorBoletas";
 
-function AsociarBoletaComponent({ isOpen, cedula }) {
+function AsociarBoletaComponent({ isOpen, cedula, handleCloseMain }) {
   const userData = useSelector((state) => state.user.value);
   const TOKEN = userData.access_token;
   const [show, setShow] = useState(false);
@@ -17,8 +17,8 @@ function AsociarBoletaComponent({ isOpen, cedula }) {
   const [listaBoletas, setListaBoletas] = useState([]);
 
   const handleClose = () =>{
+    handleCloseMain();
     setShow(false);
-    window.location.reload()
   } 
   const handleShow = () => setShow(true);
 
@@ -56,14 +56,13 @@ function AsociarBoletaComponent({ isOpen, cedula }) {
         },
       })
       .then((response) => {
-        //console.log("Respuesta del servidor:", response.data);
         if (response.data.mensaje[0] == "0"){
-          toast.error('Boletas No asociadas',{
-            autoClose: 1000, 
+          toast.error('Boleta no asociada'+ `  N° ${boleta}`,{
+            autoClose: 250, 
           });
         }else{
-          toast.success(response.data.mensaje + `  N° ${boleta}`,{
-            autoClose: 1000, 
+          toast.success('Boleta asociada'+ `  N° ${boleta}`,{
+            autoClose: 250, 
           });
         }
         

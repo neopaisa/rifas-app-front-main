@@ -8,18 +8,22 @@ import { API_URL } from "../../api/api";
 import { ToastContainer, toast } from "react-toastify";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-function EliminarBoletaComponent({ isOpen, cedula }) {
+function EliminarBoletaComponent({ isOpen, cedula , handleCloseMain }) {
   const userData = useSelector((state) => state.user.value);
   const TOKEN = userData.access_token;
   const [show, setShow] = useState(false);
   const [boleta, setBoleta] = useState(0);
   const [listaBoletas, setListaBoletas] = useState([]);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () =>{
+    handleCloseMain();
+    setShow(false);
+  } 
+
+
   const handleShow = () => setShow(true);
 
   const eliminarBoleta = (boleta) => {
-    // Crear una copia del estado actual y agregar la nueva boleta
     const nuevaListaBoletas = [...listaBoletas, boleta];
     // Actualizar el estado con la nueva lista de boletas
     setListaBoletas(nuevaListaBoletas);
