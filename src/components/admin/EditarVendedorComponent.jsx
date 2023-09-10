@@ -68,6 +68,11 @@ const EditarVendedorComponent = ({
         var errorDetail = error.response.data.detail;
         toast.error(errorDetail);
       });
+      setUsuario("");
+      setTelefono("");
+      setDireccion("");
+      setMonto("")
+      setComision("")
     handleClose();
   };
 
