@@ -21,7 +21,6 @@ function BoletasDisponiblesTable() {
     const fetchData = async () => {
       try {
         const response = await axios.get(url);
-        console.log(response.data);
         setAllBoletas(response.data);
       } catch (error) {
         console.error(error);

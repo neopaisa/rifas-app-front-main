@@ -12,7 +12,7 @@ const IngresosTable = () => {
   const [url, setUrl] = useState(
     `${API_URL}contabilidad/ingresos?rifa_id=1&page=1&page_size=50`
   );
-  const [page, setPage] = useState(1);
+/*   const [page, setPage] = useState(1); */
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +32,12 @@ const IngresosTable = () => {
     fetchData();
   }, [url]);
 
-  useEffect(() => {
+  function searchBoleta(boleta) {
+    console.log('entraaa')
+    setUrl(`${API_URL}contabilidad/ingresos/${boleta}`);
+  }
+  
+/*   useEffect(() => {
     setUrl(
       `${API_URL}contabilidad/ingresos?rifa_id=1&page=${page}&page_size=50`
     );
@@ -40,7 +45,7 @@ const IngresosTable = () => {
 
   function changePage(value) {
     setPage(value);
-  }
+  } */
 
   const ingresoList = data.map((ingreso, index) => (
     <tr
@@ -70,7 +75,7 @@ const IngresosTable = () => {
 
   return (
     <div className="flex justify-center flex-col">
-      <input
+      {/* <input
         type="number"
         placeholder="Página"
         min="1"
@@ -78,7 +83,12 @@ const IngresosTable = () => {
         onChange={(e) => changePage(e.target.value)}
         className="p-3 m-auto "
         value={page}
-      />
+      /> */}
+      <div className="flex justify-center items-center gap-3 text-gray-500">
+        <span>Buscar Ingreso por boleta:</span>
+      <input type="number" min="0" placeholder="Buscar" onChange={(e)=>searchBoleta(e.target.value)} className="input p-2 w-24 rounded"/>
+      </div>
+     
       <div className="ra-div-table my-3">
         <table className="ra-main-table shadow">
           <thead>
