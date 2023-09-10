@@ -14,6 +14,7 @@ import { API_URL } from "../../api/api";
 import EliminarBoletaComponent from "./EliminarBoletaComponent";
 import EliminarVendedorComponent from "./EliminarVendedorComponent";
 
+
 const VendedoresTable = () => {
   const userData = useSelector((state) => state.user.value);
   const TOKEN = userData.access_token;
@@ -29,14 +30,16 @@ const VendedoresTable = () => {
   const [adress, setAdress] = useState("");
   const [phone, setPhone] = useState("");
   const [valorPendiente, setValorPendiente] = useState(0);
-  //estado de ejemplo para verificacion del tiempo de la api
-  const [needsRefetch, setNeedsRefetch] = useState(false);
 
   const url = `${API_URL}ven/obtener`;
   const vendedorURL = `${API_URL}ven/informacion/`;
-  
+  //estado para obtener los datos
+  const [needsRefetch, setNeedsRefetch] = useState(false);
   const vendedorBoletaUnitaria = `${API_URL}boletas/vendedor/${vendedorName}`
   //const vendedorComisionURL = `${API_URL}contabilidad/ingreso/1088349108/?rifa_id=1&page=1&page_size=50`
+
+
+
   const fetchVendedoresList = async () => {
     try {
       const response = await axios.get(url, {
@@ -94,6 +97,13 @@ const VendedoresTable = () => {
     fetchBoletasData();
   }, [vendedorName]);
 
+  useEffect(() => {
+    if (needsRefetch) {
+        fetchBoletasData();
+        fetchVendedoresData();
+        setNeedsRefetch(false);
+    }
+}, [needsRefetch]);  
 
   const fetchVendedoresData = async () => {
     try {
@@ -115,13 +125,7 @@ const VendedoresTable = () => {
   useEffect(() => {
     fetchBoletasData();
   }, [boleta]);
-  useEffect(() => {
-    if (needsRefetch) {
-        fetchBoletasData();
-        fetchVendedoresData();
-        setNeedsRefetch(false);
-    }
-}, [needsRefetch]);
+
   /*   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -154,14 +158,14 @@ const VendedoresTable = () => {
   };
 
   const handleClose = () => {
-    // // Introduce a delay of 3 seconds (3000 milliseconds) before fetching data
-    // setTimeout(() => {
-    //   fetchBoletasData(); 
-    //   fetchVendedoresData();// Fetch data to update with the latest changes
-    //    // End loading state
-    // }, 2000);
-    // setIsOpen(false);
-    setNeedsRefetch(true);
+    //Introduce a delay of 3 seconds (3000 milliseconds) before fetching data
+    setTimeout(() => {
+      fetchBoletasData(); 
+      fetchVendedoresData();// Fetch data to update with the latest changes
+       // End loading state
+    }, 2000);
+    setIsOpen(false);
+    // setNeedsRefetch(true);
   };
   return (
     <div className="ra-main-div-vendedores flex items-center flex-col">
