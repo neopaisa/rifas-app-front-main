@@ -159,13 +159,13 @@ const VendedoresTable = () => {
 
   const handleClose = () => {
     //Introduce a delay of 3 seconds (3000 milliseconds) before fetching data
-    setTimeout(() => {
-      fetchBoletasData(); 
-      fetchVendedoresData();// Fetch data to update with the latest changes
-       // End loading state
-    }, 2000);
+    // setTimeout(() => {
+    //   fetchBoletasData(); 
+    //   fetchVendedoresData();// Fetch data to update with the latest changes
+    //    // End loading state
+    // }, 2000);
     setIsOpen(false);
-    // setNeedsRefetch(true);
+    setNeedsRefetch(true);
   };
   return (
     <div className="ra-main-div-vendedores flex items-center flex-col">
