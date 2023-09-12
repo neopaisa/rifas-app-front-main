@@ -16,7 +16,7 @@ function AvatarNavbar() {
   const userData = useSelector((state) => state.user.value);
   const rol = userData.rol;
   const [navigation, setNavigation] = useState([]);
-  const navigationAdmin = [
+  const navigationRoot = [
     { name: "General", href: "/admin" },
     { name: "Vendedores", href: "/vendedores" },
     { name: "Boletas Disponibles", href: "/boletas-disponibles" },
@@ -24,12 +24,21 @@ function AvatarNavbar() {
     { name: "Gastos", href: "/gastos" },
     { name: "Total", href: "/total" },
   ];
+  const navigationAdmin = [
+    { name: "General", href: "/admin" },
+    { name: "Vendedores", href: "/vendedores" },
+    { name: "Boletas Disponibles", href: "/boletas-disponibles" },
+    { name: "Ingresos", href: "/ingresos" },
+    { name: "Gastos", href: "/gastos" },
+  ];
   const navigationUser = [
     { name: "Boletas Disponibles", href: "/boletas-disponibles" },
   ];
 
   useEffect(()=>{
     if (rol == 'root'){
+      setNavigation(navigationRoot)
+    }else if (rol =='administrador'){
       setNavigation(navigationAdmin)
     }else{
       setNavigation(navigationUser)

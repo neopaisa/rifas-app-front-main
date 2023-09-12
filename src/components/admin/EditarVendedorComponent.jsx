@@ -226,7 +226,6 @@ const EditarVendedorComponent = ({
                   name="comision"
                   type="number"
                   autoComplete="currency"
-                  required
                   className="block w-full  py-1.5 px-2  ra-input"
                 />
               </div>
