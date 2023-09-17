@@ -23,7 +23,7 @@ const VendedoresTable = () => {
   const [vendedorInfo, setVendedorInfo] = useState({});
   const [vendedorBoletas, setVendedorBoletas] = useState([]);
   const [boleta, setBoleta] = useState("")
-  //const [vendedorComision, setVendedorComision] = useState({});
+  const [vendedorComision, setVendedorComision] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState("");
   const [user, setUser] = useState("");
@@ -35,8 +35,7 @@ const VendedoresTable = () => {
   const vendedorURL = `${API_URL}ven/informacion/`;
   //estado para obtener los datos
   const [needsRefetch, setNeedsRefetch] = useState(false);
-  const vendedorBoletaUnitaria = `${API_URL}boletas/vendedor/${vendedorName}`
-  //const vendedorComisionURL = `${API_URL}contabilidad/ingreso/1088349108/?rifa_id=1&page=1&page_size=50`
+
 
 
 
@@ -67,7 +66,6 @@ const VendedoresTable = () => {
         },
       });
       setVendedorBoletas(response.data);
-      //console.log("BOELTASSS VENDEDORRR", response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -82,9 +80,7 @@ const VendedoresTable = () => {
             Authorization: `Bearer ${TOKEN}`,
           },
         });
-        console.log('entraaaa')
         setVendedorBoletas(response.data);
-        //console.log("BOELTASSS VENDEDORRR", response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
         setVendedorBoletas([])
@@ -164,6 +160,8 @@ const VendedoresTable = () => {
     //   fetchVendedoresData();// Fetch data to update with the latest changes
     //    // End loading state
     // }, 2000);
+
+    
     setIsOpen(false);
     setNeedsRefetch(true);
   };

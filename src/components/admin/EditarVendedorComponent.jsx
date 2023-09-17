@@ -35,6 +35,8 @@ const EditarVendedorComponent = ({
       setUsuario(user);
       setTelefono(phone);
       setDireccion(adress);
+      setComision(0);
+      setMonto(0);
     }
   }, [user]);
 
