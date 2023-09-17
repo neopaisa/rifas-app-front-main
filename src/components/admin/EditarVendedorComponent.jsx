@@ -70,11 +70,11 @@ const EditarVendedorComponent = ({
         var errorDetail = error.response.data.detail;
         toast.error(errorDetail);
       });
-      setUsuario("");
-      setTelefono("");
-      setDireccion("");
-      setMonto("")
-      setComision("")
+      setUsuario(user);
+      setTelefono(phone);
+      setDireccion(adress);
+      setComision(0);
+      setMonto(0);
     handleClose();
   };
 
