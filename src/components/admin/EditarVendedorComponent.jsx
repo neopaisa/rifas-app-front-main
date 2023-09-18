@@ -62,20 +62,20 @@ const EditarVendedorComponent = ({
         },
       })
       .then(() => {
-        //console.log("Respuesta del servidor:", response.data);
+        setUsuario(user);
+        setTelefono(phone);
+        setDireccion(adress);
+        setComision(0);
+        setMonto(0);
+        handleClose();
         toast.success("Datos Actualizados Correctamente");
+        // toast.success("Datos Actualizados Correctamente");
       })
       .catch((error) => {
         console.error("Error al hacer la solicitud:", error);
         var errorDetail = error.response.data.detail;
         toast.error(errorDetail);
       });
-      setUsuario(user);
-      setTelefono(phone);
-      setDireccion(adress);
-      setComision(0);
-      setMonto(0);
-    handleClose();
   };
 
   return (
