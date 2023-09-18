@@ -23,20 +23,16 @@ const VendedoresTable = () => {
   const [vendedorInfo, setVendedorInfo] = useState({});
   const [vendedorBoletas, setVendedorBoletas] = useState([]);
   const [boleta, setBoleta] = useState("")
-  const [vendedorComision, setVendedorComision] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState("");
   const [user, setUser] = useState("");
   const [adress, setAdress] = useState("");
   const [phone, setPhone] = useState("");
   const [valorPendiente, setValorPendiente] = useState(0);
-
   const url = `${API_URL}ven/obtener`;
   const vendedorURL = `${API_URL}ven/informacion/`;
   //estado para obtener los datos
   const [needsRefetch, setNeedsRefetch] = useState(false);
-
-
 
 
   const fetchVendedoresList = async () => {
@@ -70,6 +66,7 @@ const VendedoresTable = () => {
       console.error("Error fetching data:", error);
     }
   };
+
 
   useEffect(()=>{
     const vendedorBoletasURL = `${API_URL}ven/boletas/${vendedorName}`;
@@ -122,22 +119,7 @@ const VendedoresTable = () => {
     fetchBoletasData();
   }, [boleta]);
 
-  /*   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(vendedorComisionURL, {
-          headers: {
-            Authorization: `Bearer ${TOKEN}`,
-          },
-        });
-        setVendedorComision(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, []);
- */
+
   const handleOpen = (
     numeroBoleta,
     nombreUsuario,
@@ -153,18 +135,11 @@ const VendedoresTable = () => {
     setIsOpen(true);
   };
 
-  const handleClose = () => {
-    //Introduce a delay of 3 seconds (3000 milliseconds) before fetching data
-    // setTimeout(() => {
-    //   fetchBoletasData(); 
-    //   fetchVendedoresData();// Fetch data to update with the latest changes
-    //    // End loading state
-    // }, 2000);
-
-    
+  const handleClose = () => {   
     setIsOpen(false);
     setNeedsRefetch(true);
   };
+  
   return (
     <div className="ra-main-div-vendedores flex items-center flex-col">
       <EditarVendedorComponent
@@ -186,7 +161,7 @@ const VendedoresTable = () => {
             <div className="flex items-center mb-2">
               {
                 <select
-                  className="bg-white rounded  border-2 border-gray-300 m-0 h-10 ra-vendedores-body"
+                  className="bg-white rounded border-2 border-gray-300 m-50 h-10 ra-vendedores-body ml-2 mr-2"
                   value={vendedorName}
                   onChange={(e) => setVendedorName(e.target.value)}
                 >
@@ -217,15 +192,15 @@ const VendedoresTable = () => {
               </p>
               <p className="mx-1">{vendedorInfo.telefono}</p>
             </div>
-            <div className="flex m-0">
-              <p className="font-bold mr-1 my-0">Ingreso Bruto:</p>
+            <div className="flex m-0 w-3/4">
+              <p className="font-bold mr-1 my-0 w-[200px]">Ingreso Bruto:</p>
               <p className="flex m-0">
                 {formatCurrency(vendedorInfo.ingreso_bruto)}
               </p>
             </div>
             <div className="flex m-0">
               <p className="font-bold mr-1 my-0">Comisión:</p>
-              <p className="flex m-0">
+              <p className="flex m-0 w-auto">
                 {formatCurrency(vendedorInfo.comision)}
               </p>
             </div>

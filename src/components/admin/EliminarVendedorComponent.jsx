@@ -49,7 +49,7 @@ function EliminarVendedorComponent({ isOpen, vendedorName, vendedorCedula }) {
     <>
       <ToastContainer />
 
-      <OverlayTrigger
+      {/* <OverlayTrigger
         placement="top"
         overlay={<Tooltip>Eliminar Vendedor</Tooltip>}
       >
@@ -59,7 +59,7 @@ function EliminarVendedorComponent({ isOpen, vendedorName, vendedorCedula }) {
       >
         <AiFillDelete className="mx-1" />
       </button>
-      </OverlayTrigger>
+      </OverlayTrigger> */}
       
 
       <Modal show={show} onHide={handleClose}>
