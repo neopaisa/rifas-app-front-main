@@ -15,6 +15,8 @@ function EliminarBoletaComponent({ isOpen, cedula , handleCloseMain }) {
   const [boleta, setBoleta] = useState(0);
   const [listaBoletas, setListaBoletas] = useState([]);
 
+
+
   const handleClose = () =>{
     handleCloseMain();
     setShow(false);
@@ -40,14 +42,14 @@ function EliminarBoletaComponent({ isOpen, cedula , handleCloseMain }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     const url = `${API_URL}ven/quitar`;
-
+  
     const data = {
       cedula: cedula,
       boletas: listaBoletas,
     };
-    //console.log(data)
+    console.log(data)
     axios
       .post(url, data, {
         headers: {
@@ -55,13 +57,23 @@ function EliminarBoletaComponent({ isOpen, cedula , handleCloseMain }) {
         },
       })
       .then((response) => {
-        //console.log("Respuesta del servidor:", response.data);
-        toast.success(response.data.mensaje + `  N° ${boleta}`);
+        // Limpiar la lista de boletas después de una respuesta exitosa
+
+        toast.success(response.data.mensaje + `  N° ${boleta}`, {
+          autoClose: 200 // 2000 milisegundos (2 segundos)
+        });
+        setBoleta(0);
+        setListaBoletas([]);
+  
       })
       .catch((error) => {
         console.error("Error al hacer la solicitud:", error);
+        setBoleta(0);
+        setListaBoletas([]);
         var errorDetail = error.response.data.detail;
-        toast.error(errorDetail);
+        toast.error(errorDetail, {
+          autoClose: 200 // 2000 milisegundos (2 segundos)
+        });
       });
   };
 
