@@ -9,11 +9,11 @@ function Dashboard() {
     document.title = "Rifas App - Admin Dashboard";
   }, []);
   return (
-    <>
+    <div style={{ marginTop: "70px" }}>
       <AvatarNavbar />
       <AdminDashboard />
       <Footer />
-    </>
+    </div>
   );
 }
 

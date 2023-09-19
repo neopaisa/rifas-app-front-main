@@ -7,7 +7,7 @@ function IngresosPage() {
   return (
     <div>
       <AvatarNavbar />
-      <div className="bg-gray-300 py-3">
+      <div className="bg-gray-300 py-3" style={{ marginTop: "70px" }}>
         <IngresosTable />
       </div>
       <Footer />

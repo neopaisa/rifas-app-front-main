@@ -7,7 +7,9 @@ function TotalPage() {
   return (
     <div>
       <AvatarNavbar />
-      <TotalComponent/>
+      <div style={{ marginTop: "70px" }}>
+        <TotalComponent />
+      </div>
       <Footer />
     </div>
   );

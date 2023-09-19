@@ -5,11 +5,11 @@ import Footer from "../components/global/Footer";
 
 function BoletasDisponiblesPage() {
   return (
-    <div>
-      <AvatarNavbar/>
+    <div style={{ marginTop: "70px" }}>
+      <AvatarNavbar />
       <BoletasDisponiblesTable />
-      <Footer/></div>
-  )
+      <Footer />
+    </div>
+  );
 }
-
 export default BoletasDisponiblesPage

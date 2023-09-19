@@ -51,6 +51,7 @@ function AvatarNavbar() {
     dispatch(logout());
   };
   return (
+    <div className="avatar-navbar fixed top-0 left-0 right-0 bg-white z-50" > 
     <Disclosure as="nav" className="bg-white">
       {({ open }) => (
         <>
@@ -198,6 +199,7 @@ function AvatarNavbar() {
         </>
       )}
     </Disclosure>
+    </div>
   );
 }
 
