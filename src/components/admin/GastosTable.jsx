@@ -9,6 +9,7 @@ import ModalGastos from "./ModalGastos";
 import { API_URL } from "../../api/api";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
+
 function GastosTable() {
   const userData = useSelector((state) => state.user.value);
   const TOKEN = userData.access_token;
@@ -18,34 +19,46 @@ function GastosTable() {
   );
   const [gastos, setGastos] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
+  const [needsRefetch, setNeedsRefetch] = useState(false);
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      console.log("Recargando la lista de gastos...");
+      const response = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      });
+      const json = response.data;
+      setLoading(false);
+      setGastos(json);
+    } catch (error) {
+      console.error(error);
+      toast.error(error.response.data.detail);
+    }
+  };
+
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(url, {
-          headers: {
-            Authorization: `Bearer ${TOKEN}`,
-          },
-        });
-        const json = response.data;
-        console.log(json);
-        setLoading(false);
-        setGastos(json);
-        console.log("gastos", gastos);
-      } catch (error) {
-        console.error(error);
-        toast.error(error.response.data.detail);
-      }
-    };
-
     fetchData();
   }, []);
 
+  // useEffect(() => {
+  // }, [gastos]);
+
   useEffect(() => {
-    console.log("gastos actualizado:", gastos);
-    //console.log(itemList);
-  }, [gastos]);
+    if (needsRefetch) {
+        fetchData();
+        setNeedsRefetch(false);
+    }
+}, [needsRefetch]);  
+
+const handleClose = () => {   
+  // setIsOpen(false);
+  setNeedsRefetch(true);
+  setShow(false);
+};
 
   const itemList = gastos.map((item) => {
     if (!loading) {
@@ -79,7 +92,7 @@ function GastosTable() {
   return (
     <div className="bg-gray-300 p-2">
       <ToastContainer />
-      <ModalGastos isOpen={showModal} />
+      <ModalGastos isOpen={showModal} handleClose={handleClose}/>
       <div className="ra-div-table">
         <table className="ra-main-table shadow">
           <thead className="w-96">

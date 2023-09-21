@@ -6,7 +6,7 @@ import axios from "axios";
 import { API_URL } from "../../api/api";
 import { ToastContainer, toast } from "react-toastify";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-function ModalGastos({ isOpen }) {
+function ModalGastos({ isOpen , handleClose }) {
   const userData = useSelector((state) => state.user.value);
   const TOKEN = userData.access_token;
   const today = new Date();
@@ -16,9 +16,9 @@ function ModalGastos({ isOpen }) {
   const [monto, setMonto] = useState(0);
   const [date, setDate] = useState(fechaHoy);
 
-  const handleClose = () =>{
+  const close = () =>{
     setShow(false);
-    window.location.reload();
+    
   } 
 
   const handleShow = () => setShow(true);
@@ -26,18 +26,18 @@ function ModalGastos({ isOpen }) {
   useEffect(() => {
     setShow(isOpen);
   }, [isOpen]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     const url = `${API_URL}contabilidad/crear`;
-
+  
     const data = {
       descripcion: descripcion,
       fecha_gasto: date,
       monto: monto,
       boleta_rifa_id: 1,
     };
+    console.log(data)
 
     axios
       .post(url, data, {
@@ -46,16 +46,20 @@ function ModalGastos({ isOpen }) {
         },
       })
       .then(() => {
-        //console.log("Respuesta del servidor:", response.data);
-        toast.success("Datos Actualizados Correctamente");
+        toast.success("Gasto creado con éxito");
+        handleClose();
+        close();
+        // Aquí puedes realizar actualizaciones en tu estado local si es necesario.
       })
       .catch((error) => {
         console.error("Error al hacer la solicitud:", error);
-        var errorDetail = error.response.data.detail;
+        var errorDetail = error.response ? error.response.data.detail : "Error desconocido";
         toast.error(errorDetail);
       });
-      handleClose();
+  
+    // Cierra el modal aquí si la solicitud se completa con éxito o no.
   };
+  
   return (
     <>
       <ToastContainer />
@@ -66,7 +70,7 @@ function ModalGastos({ isOpen }) {
         Agregar Gasto <AiOutlinePlusCircle className="mx-1" />
       </button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={close}>
         <Modal.Header closeButton>
           <Modal.Title>Agregar Gasto</Modal.Title>
         </Modal.Header>
