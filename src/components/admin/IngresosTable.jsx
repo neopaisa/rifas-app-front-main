@@ -10,9 +10,8 @@ const IngresosTable = () => {
   const TOKEN = userData.access_token;
   const [data, setData] = useState([]);
   const [url, setUrl] = useState(
-    `${API_URL}contabilidad/ingresos?rifa_id=1&page=1&page_size=50`
+    `${API_URL}contabilidad/ingresos?rifa_id=1&page=1&page_size=80000`
   );
-/*   const [page, setPage] = useState(1); */
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,7 +22,6 @@ const IngresosTable = () => {
           },
         });
         setData(response.data);
-        //console.log(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -31,21 +29,15 @@ const IngresosTable = () => {
 
     fetchData();
   }, [url]);
-
   function searchBoleta(boleta) {
-    console.log('entraaa')
-    setUrl(`${API_URL}contabilidad/ingresos/${boleta}`);
+    if (boleta === "") {
+      setUrl(`${API_URL}contabilidad/ingresos?rifa_id=1&page=1&page_size=80000`);
+    } else {
+      console.log("Filtrar por boleta");
+      // Si hay un valor en el campo de búsqueda, realiza la búsqueda
+      setUrl(`${API_URL}contabilidad/ingresos/${boleta}`);
+    }
   }
-  
-/*   useEffect(() => {
-    setUrl(
-      `${API_URL}contabilidad/ingresos?rifa_id=1&page=${page}&page_size=50`
-    );
-  }, [page]);
-
-  function changePage(value) {
-    setPage(value);
-  } */
 
   const ingresoList = data.map((ingreso, index) => (
     <tr

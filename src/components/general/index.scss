@@ -163,4 +163,14 @@
       }
     }
   }
+  @media screen and (min-width: 1024px) {
+    .ra-main-table {
+      font-size: 14px; /* Aumenta el tamaño de fuente en computadoras */
+      width: 90%; /* Aumenta el ancho de la tabla en computadoras */
+    }
   
+    .ra-main-table th,
+    .ra-main-table td {
+      padding: 0.75em; /* Aumenta el espaciado interno en computadoras */
+    }
+  }

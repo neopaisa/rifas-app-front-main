@@ -11,7 +11,7 @@ function BuscadorBoletas() {
     const fetchData = async () => {
       try {
         const response = await axios.get(urlBoleta + boletaInd);
-        console.log(response.data);
+        // console.log(response.data);
         setBoletaEstado(response.data[0]);
         console.log("BOLETA ESTADOO,", boletaEstado);
       } catch (error) {
