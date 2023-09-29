@@ -138,10 +138,10 @@ const EditarVendedorComponent = ({
                   name="usuario"
                   type="text"
                   autoComplete="name"
-                  required
+                  // required
                   className="block w-full  py-1.5 px-2 ra-input"
-                  disabled={!user ? false : true}
-                  style={{ backgroundColor: !user ? "white" : "#eee" }}
+                  // disabled={!user ? false : true}
+                  // style={{ backgroundColor: !user ? "white" : "#eee" }}
                 />
               </div>
             </div>
@@ -161,7 +161,7 @@ const EditarVendedorComponent = ({
                   name="telefono"
                   type="number"
                   autoComplete="phone"
-                  required
+                  // required
                   className="block w-full  py-1.5 px-2 ra-input"
                 />
               </div>
@@ -182,7 +182,6 @@ const EditarVendedorComponent = ({
                   name="direccion"
                   type="text"
                   autoComplete="adress"
-                  required
                   className="block w-full  py-1.5 px-2 ra-input"
                 />
               </div>
